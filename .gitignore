@@ -1,0 +1,126 @@
+# Created by https://www.gitignore.io/api/objective-c
+
+# Edit at https://www.gitignore.io/?templates=objective-c
+
+### Objective-C ###
+
+# Xcode
+
+#
+
+# gitignore contributors: remember to update Global/Xcode.gitignore, Objective-C.gitignore & Swift.gitignore
+
+## OS X
+
+#
+
+#DS_Store是mac系统中管理文件夹位置信息的文件
+
+.DS_Store
+
+*/.DS_Store
+
+## vim or gvim每次写完代码的时候，项目中会多出很多*.swp文件
+
+*.swp
+
+## Build generated(编译时产生的文件)
+
+build/
+
+DerivedData/
+
+## Various settings(其他设置)
+
+*.pbxuser
+
+!default.pbxuser
+
+*.mode1v3
+
+!default.mode1v3
+
+*.mode2v3
+
+!default.mode2v3
+
+*.perspectivev3
+
+!default.perspectivev3
+
+xcuserdata/
+
+## Other
+
+*.moved-aside
+
+*.xccheckout
+
+*.xcscmblueprint
+
+## Obj-C/Swift specific
+
+*.hmap
+
+*.ipa
+
+*.dSYM.zip
+
+*.dSYM
+
+# CocoaPods(管理第三方的工具)
+
+#
+
+# We recommend against adding the Pods directory to your .gitignore. However
+
+# you should judge for yourself, the pros and cons are mentioned at:
+
+# https://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
+
+Pods/
+
+# Carthage(类似于CocoaPods的管理第三方的工具)
+
+#
+
+# Add this line if you want to avoid checking in source code from Carthage dependencies.
+
+# Carthage/Checkouts
+
+Carthage/Build
+
+# fastlane(自动打包工具集)
+
+#
+
+# It is recommended to not store the screenshots in the git repo. Instead, use fastlane to re-generate the
+
+# screenshots whenever they are needed.
+
+# For more information about the recommended setup visit:
+
+# https://docs.fastlane.tools/best-practices/source-control/#source-control
+
+fastlane/report.xml
+
+fastlane/Preview.html
+
+fastlane/screenshots/**/*.png
+
+fastlane/test_output
+
+# Code Injection(Xcode上的一个插件)
+
+#
+
+# After new code Injection tools there's a generated folder /iOSInjectionProject
+
+# https://github.com/johnno1962/injectionforxcode
+
+iOSInjectionProject/
+
+### Objective-C Patch ###
+
+# End of https://www.gitignore.io/api/objective-c
+

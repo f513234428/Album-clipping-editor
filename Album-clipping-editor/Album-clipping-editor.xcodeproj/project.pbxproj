@@ -1,0 +1,716 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		754C3BF42BB1095600653926 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3BF32BB1095600653926 /* AppDelegate.m */; };
+		754C3BFA2BB1095600653926 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3BF92BB1095600653926 /* ViewController.m */; };
+		754C3BFD2BB1095600653926 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 754C3BFB2BB1095600653926 /* Main.storyboard */; };
+		754C3BFF2BB1095700653926 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 754C3BFE2BB1095700653926 /* Assets.xcassets */; };
+		754C3C022BB1095700653926 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C002BB1095700653926 /* LaunchScreen.storyboard */; };
+		754C3C052BB1095700653926 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C042BB1095700653926 /* main.m */; };
+		754C3C0F2BB1095700653926 /* Album_clipping_editorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C0E2BB1095700653926 /* Album_clipping_editorTests.m */; };
+		754C3C192BB1095700653926 /* Album_clipping_editorUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C182BB1095700653926 /* Album_clipping_editorUITests.m */; };
+		754C3C1B2BB1095700653926 /* Album_clipping_editorUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C1A2BB1095700653926 /* Album_clipping_editorUITestsLaunchTests.m */; };
+		754C3C432BB10F3D00653926 /* ClipViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C282BB10F3D00653926 /* ClipViewController.m */; };
+		754C3C442BB10F3D00653926 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C292BB10F3D00653926 /* CameraViewController.m */; };
+		754C3C452BB10F3D00653926 /* cameraPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C2C2BB10F3D00653926 /* cameraPhoto@2x.png */; };
+		754C3C462BB10F3D00653926 /* openFlish@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C2D2BB10F3D00653926 /* openFlish@3x.png */; };
+		754C3C472BB10F3D00653926 /* cancleCamera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C2E2BB10F3D00653926 /* cancleCamera@3x.png */; };
+		754C3C482BB10F3D00653926 /* canclePhoto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C2F2BB10F3D00653926 /* canclePhoto@3x.png */; };
+		754C3C492BB10F3D00653926 /* takePhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C302BB10F3D00653926 /* takePhoto@2x.png */; };
+		754C3C4A2BB10F3D00653926 /* sureCamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C312BB10F3D00653926 /* sureCamera@2x.png */; };
+		754C3C4B2BB10F3D00653926 /* sureCamera@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C322BB10F3D00653926 /* sureCamera@3x.png */; };
+		754C3C4C2BB10F3D00653926 /* takePhoto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C332BB10F3D00653926 /* takePhoto@3x.png */; };
+		754C3C4D2BB10F3D00653926 /* canclePhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C342BB10F3D00653926 /* canclePhoto@2x.png */; };
+		754C3C4E2BB10F3D00653926 /* cancleCamera@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C352BB10F3D00653926 /* cancleCamera@2x.png */; };
+		754C3C4F2BB10F3D00653926 /* openFlish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C362BB10F3D00653926 /* openFlish@2x.png */; };
+		754C3C502BB10F3D00653926 /* cameraPhoto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C372BB10F3D00653926 /* cameraPhoto@3x.png */; };
+		754C3C512BB10F3D00653926 /* clipPhoto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C382BB10F3D00653926 /* clipPhoto@3x.png */; };
+		754C3C522BB10F3D00653926 /* clipPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C392BB10F3D00653926 /* clipPhoto@2x.png */; };
+		754C3C532BB10F3D00653926 /* closeFlish@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C3A2BB10F3D00653926 /* closeFlish@3x.png */; };
+		754C3C542BB10F3D00653926 /* closeFlish@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C3B2BB10F3D00653926 /* closeFlish@2x.png */; };
+		754C3C552BB10F3D00653926 /* surePhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C3C2BB10F3D00653926 /* surePhoto@2x.png */; };
+		754C3C562BB10F3D00653926 /* backPhoto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C3D2BB10F3D00653926 /* backPhoto@3x.png */; };
+		754C3C572BB10F3D00653926 /* backPhoto@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C3E2BB10F3D00653926 /* backPhoto@2x.png */; };
+		754C3C582BB10F3D00653926 /* surePhoto@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C3F2BB10F3D00653926 /* surePhoto@3x.png */; };
+		754C3C592BB10F3D00653926 /* TKImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C422BB10F3D00653926 /* TKImageView.m */; };
+		754C3C5B2BB1186300653926 /* cancle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 754C3C5A2BB1186300653926 /* cancle@2x.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		754C3C0B2BB1095700653926 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 754C3BE72BB1095600653926 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 754C3BEE2BB1095600653926;
+			remoteInfo = "Album-clipping-editor";
+		};
+		754C3C152BB1095700653926 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 754C3BE72BB1095600653926 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 754C3BEE2BB1095600653926;
+			remoteInfo = "Album-clipping-editor";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		754C3BEF2BB1095600653926 /* Album-clipping-editor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Album-clipping-editor.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		754C3BF22BB1095600653926 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		754C3BF32BB1095600653926 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		754C3BF82BB1095600653926 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		754C3BF92BB1095600653926 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		754C3BFC2BB1095600653926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		754C3BFE2BB1095700653926 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		754C3C012BB1095700653926 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		754C3C032BB1095700653926 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		754C3C042BB1095700653926 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		754C3C0A2BB1095700653926 /* Album-clipping-editorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Album-clipping-editorTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		754C3C0E2BB1095700653926 /* Album_clipping_editorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Album_clipping_editorTests.m; sourceTree = "<group>"; };
+		754C3C142BB1095700653926 /* Album-clipping-editorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Album-clipping-editorUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		754C3C182BB1095700653926 /* Album_clipping_editorUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Album_clipping_editorUITests.m; sourceTree = "<group>"; };
+		754C3C1A2BB1095700653926 /* Album_clipping_editorUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Album_clipping_editorUITestsLaunchTests.m; sourceTree = "<group>"; };
+		754C3C282BB10F3D00653926 /* ClipViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClipViewController.m; sourceTree = "<group>"; };
+		754C3C292BB10F3D00653926 /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		754C3C2A2BB10F3D00653926 /* TKImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKImageView.h; sourceTree = "<group>"; };
+		754C3C2C2BB10F3D00653926 /* cameraPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraPhoto@2x.png"; sourceTree = "<group>"; };
+		754C3C2D2BB10F3D00653926 /* openFlish@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "openFlish@3x.png"; sourceTree = "<group>"; };
+		754C3C2E2BB10F3D00653926 /* cancleCamera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancleCamera@3x.png"; sourceTree = "<group>"; };
+		754C3C2F2BB10F3D00653926 /* canclePhoto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "canclePhoto@3x.png"; sourceTree = "<group>"; };
+		754C3C302BB10F3D00653926 /* takePhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "takePhoto@2x.png"; sourceTree = "<group>"; };
+		754C3C312BB10F3D00653926 /* sureCamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sureCamera@2x.png"; sourceTree = "<group>"; };
+		754C3C322BB10F3D00653926 /* sureCamera@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sureCamera@3x.png"; sourceTree = "<group>"; };
+		754C3C332BB10F3D00653926 /* takePhoto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "takePhoto@3x.png"; sourceTree = "<group>"; };
+		754C3C342BB10F3D00653926 /* canclePhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "canclePhoto@2x.png"; sourceTree = "<group>"; };
+		754C3C352BB10F3D00653926 /* cancleCamera@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancleCamera@2x.png"; sourceTree = "<group>"; };
+		754C3C362BB10F3D00653926 /* openFlish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "openFlish@2x.png"; sourceTree = "<group>"; };
+		754C3C372BB10F3D00653926 /* cameraPhoto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cameraPhoto@3x.png"; sourceTree = "<group>"; };
+		754C3C382BB10F3D00653926 /* clipPhoto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clipPhoto@3x.png"; sourceTree = "<group>"; };
+		754C3C392BB10F3D00653926 /* clipPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clipPhoto@2x.png"; sourceTree = "<group>"; };
+		754C3C3A2BB10F3D00653926 /* closeFlish@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeFlish@3x.png"; sourceTree = "<group>"; };
+		754C3C3B2BB10F3D00653926 /* closeFlish@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "closeFlish@2x.png"; sourceTree = "<group>"; };
+		754C3C3C2BB10F3D00653926 /* surePhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "surePhoto@2x.png"; sourceTree = "<group>"; };
+		754C3C3D2BB10F3D00653926 /* backPhoto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backPhoto@3x.png"; sourceTree = "<group>"; };
+		754C3C3E2BB10F3D00653926 /* backPhoto@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backPhoto@2x.png"; sourceTree = "<group>"; };
+		754C3C3F2BB10F3D00653926 /* surePhoto@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "surePhoto@3x.png"; sourceTree = "<group>"; };
+		754C3C402BB10F3D00653926 /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		754C3C412BB10F3D00653926 /* ClipViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClipViewController.h; sourceTree = "<group>"; };
+		754C3C422BB10F3D00653926 /* TKImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKImageView.m; sourceTree = "<group>"; };
+		754C3C5A2BB1186300653926 /* cancle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cancle@2x.png"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		754C3BEC2BB1095600653926 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		754C3C072BB1095700653926 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		754C3C112BB1095700653926 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		754C3BE62BB1095600653926 = {
+			isa = PBXGroup;
+			children = (
+				754C3BF12BB1095600653926 /* Album-clipping-editor */,
+				754C3C0D2BB1095700653926 /* Album-clipping-editorTests */,
+				754C3C172BB1095700653926 /* Album-clipping-editorUITests */,
+				754C3BF02BB1095600653926 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		754C3BF02BB1095600653926 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				754C3BEF2BB1095600653926 /* Album-clipping-editor.app */,
+				754C3C0A2BB1095700653926 /* Album-clipping-editorTests.xctest */,
+				754C3C142BB1095700653926 /* Album-clipping-editorUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		754C3BF12BB1095600653926 /* Album-clipping-editor */ = {
+			isa = PBXGroup;
+			children = (
+				754C3BF22BB1095600653926 /* AppDelegate.h */,
+				754C3BF32BB1095600653926 /* AppDelegate.m */,
+				754C3BF82BB1095600653926 /* ViewController.h */,
+				754C3BF92BB1095600653926 /* ViewController.m */,
+				754C3C272BB10F3D00653926 /* CameraTool */,
+				754C3BFB2BB1095600653926 /* Main.storyboard */,
+				754C3BFE2BB1095700653926 /* Assets.xcassets */,
+				754C3C002BB1095700653926 /* LaunchScreen.storyboard */,
+				754C3C032BB1095700653926 /* Info.plist */,
+				754C3C042BB1095700653926 /* main.m */,
+			);
+			path = "Album-clipping-editor";
+			sourceTree = "<group>";
+		};
+		754C3C0D2BB1095700653926 /* Album-clipping-editorTests */ = {
+			isa = PBXGroup;
+			children = (
+				754C3C0E2BB1095700653926 /* Album_clipping_editorTests.m */,
+			);
+			path = "Album-clipping-editorTests";
+			sourceTree = "<group>";
+		};
+		754C3C172BB1095700653926 /* Album-clipping-editorUITests */ = {
+			isa = PBXGroup;
+			children = (
+				754C3C182BB1095700653926 /* Album_clipping_editorUITests.m */,
+				754C3C1A2BB1095700653926 /* Album_clipping_editorUITestsLaunchTests.m */,
+			);
+			path = "Album-clipping-editorUITests";
+			sourceTree = "<group>";
+		};
+		754C3C272BB10F3D00653926 /* CameraTool */ = {
+			isa = PBXGroup;
+			children = (
+				754C3C402BB10F3D00653926 /* CameraViewController.h */,
+				754C3C292BB10F3D00653926 /* CameraViewController.m */,
+				754C3C412BB10F3D00653926 /* ClipViewController.h */,
+				754C3C282BB10F3D00653926 /* ClipViewController.m */,
+				754C3C2B2BB10F3D00653926 /* image */,
+				754C3C2A2BB10F3D00653926 /* TKImageView.h */,
+				754C3C422BB10F3D00653926 /* TKImageView.m */,
+			);
+			path = CameraTool;
+			sourceTree = "<group>";
+		};
+		754C3C2B2BB10F3D00653926 /* image */ = {
+			isa = PBXGroup;
+			children = (
+				754C3C2C2BB10F3D00653926 /* cameraPhoto@2x.png */,
+				754C3C2D2BB10F3D00653926 /* openFlish@3x.png */,
+				754C3C2E2BB10F3D00653926 /* cancleCamera@3x.png */,
+				754C3C2F2BB10F3D00653926 /* canclePhoto@3x.png */,
+				754C3C302BB10F3D00653926 /* takePhoto@2x.png */,
+				754C3C312BB10F3D00653926 /* sureCamera@2x.png */,
+				754C3C322BB10F3D00653926 /* sureCamera@3x.png */,
+				754C3C5A2BB1186300653926 /* cancle@2x.png */,
+				754C3C332BB10F3D00653926 /* takePhoto@3x.png */,
+				754C3C342BB10F3D00653926 /* canclePhoto@2x.png */,
+				754C3C352BB10F3D00653926 /* cancleCamera@2x.png */,
+				754C3C362BB10F3D00653926 /* openFlish@2x.png */,
+				754C3C372BB10F3D00653926 /* cameraPhoto@3x.png */,
+				754C3C382BB10F3D00653926 /* clipPhoto@3x.png */,
+				754C3C392BB10F3D00653926 /* clipPhoto@2x.png */,
+				754C3C3A2BB10F3D00653926 /* closeFlish@3x.png */,
+				754C3C3B2BB10F3D00653926 /* closeFlish@2x.png */,
+				754C3C3C2BB10F3D00653926 /* surePhoto@2x.png */,
+				754C3C3D2BB10F3D00653926 /* backPhoto@3x.png */,
+				754C3C3E2BB10F3D00653926 /* backPhoto@2x.png */,
+				754C3C3F2BB10F3D00653926 /* surePhoto@3x.png */,
+			);
+			path = image;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		754C3BEE2BB1095600653926 /* Album-clipping-editor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 754C3C1E2BB1095700653926 /* Build configuration list for PBXNativeTarget "Album-clipping-editor" */;
+			buildPhases = (
+				754C3BEB2BB1095600653926 /* Sources */,
+				754C3BEC2BB1095600653926 /* Frameworks */,
+				754C3BED2BB1095600653926 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Album-clipping-editor";
+			productName = "Album-clipping-editor";
+			productReference = 754C3BEF2BB1095600653926 /* Album-clipping-editor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		754C3C092BB1095700653926 /* Album-clipping-editorTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 754C3C212BB1095700653926 /* Build configuration list for PBXNativeTarget "Album-clipping-editorTests" */;
+			buildPhases = (
+				754C3C062BB1095700653926 /* Sources */,
+				754C3C072BB1095700653926 /* Frameworks */,
+				754C3C082BB1095700653926 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				754C3C0C2BB1095700653926 /* PBXTargetDependency */,
+			);
+			name = "Album-clipping-editorTests";
+			productName = "Album-clipping-editorTests";
+			productReference = 754C3C0A2BB1095700653926 /* Album-clipping-editorTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		754C3C132BB1095700653926 /* Album-clipping-editorUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 754C3C242BB1095700653926 /* Build configuration list for PBXNativeTarget "Album-clipping-editorUITests" */;
+			buildPhases = (
+				754C3C102BB1095700653926 /* Sources */,
+				754C3C112BB1095700653926 /* Frameworks */,
+				754C3C122BB1095700653926 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				754C3C162BB1095700653926 /* PBXTargetDependency */,
+			);
+			name = "Album-clipping-editorUITests";
+			productName = "Album-clipping-editorUITests";
+			productReference = 754C3C142BB1095700653926 /* Album-clipping-editorUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		754C3BE72BB1095600653926 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					754C3BEE2BB1095600653926 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					754C3C092BB1095700653926 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 754C3BEE2BB1095600653926;
+					};
+					754C3C132BB1095700653926 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = 754C3BEE2BB1095600653926;
+					};
+				};
+			};
+			buildConfigurationList = 754C3BEA2BB1095600653926 /* Build configuration list for PBXProject "Album-clipping-editor" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 754C3BE62BB1095600653926;
+			productRefGroup = 754C3BF02BB1095600653926 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				754C3BEE2BB1095600653926 /* Album-clipping-editor */,
+				754C3C092BB1095700653926 /* Album-clipping-editorTests */,
+				754C3C132BB1095700653926 /* Album-clipping-editorUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		754C3BED2BB1095600653926 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				754C3C562BB10F3D00653926 /* backPhoto@3x.png in Resources */,
+				754C3C5B2BB1186300653926 /* cancle@2x.png in Resources */,
+				754C3C512BB10F3D00653926 /* clipPhoto@3x.png in Resources */,
+				754C3C482BB10F3D00653926 /* canclePhoto@3x.png in Resources */,
+				754C3C4B2BB10F3D00653926 /* sureCamera@3x.png in Resources */,
+				754C3C022BB1095700653926 /* LaunchScreen.storyboard in Resources */,
+				754C3C4D2BB10F3D00653926 /* canclePhoto@2x.png in Resources */,
+				754C3BFF2BB1095700653926 /* Assets.xcassets in Resources */,
+				754C3C502BB10F3D00653926 /* cameraPhoto@3x.png in Resources */,
+				754C3C542BB10F3D00653926 /* closeFlish@2x.png in Resources */,
+				754C3C4E2BB10F3D00653926 /* cancleCamera@2x.png in Resources */,
+				754C3C572BB10F3D00653926 /* backPhoto@2x.png in Resources */,
+				754C3C472BB10F3D00653926 /* cancleCamera@3x.png in Resources */,
+				754C3C582BB10F3D00653926 /* surePhoto@3x.png in Resources */,
+				754C3C532BB10F3D00653926 /* closeFlish@3x.png in Resources */,
+				754C3C492BB10F3D00653926 /* takePhoto@2x.png in Resources */,
+				754C3C462BB10F3D00653926 /* openFlish@3x.png in Resources */,
+				754C3C452BB10F3D00653926 /* cameraPhoto@2x.png in Resources */,
+				754C3BFD2BB1095600653926 /* Main.storyboard in Resources */,
+				754C3C4F2BB10F3D00653926 /* openFlish@2x.png in Resources */,
+				754C3C522BB10F3D00653926 /* clipPhoto@2x.png in Resources */,
+				754C3C4C2BB10F3D00653926 /* takePhoto@3x.png in Resources */,
+				754C3C552BB10F3D00653926 /* surePhoto@2x.png in Resources */,
+				754C3C4A2BB10F3D00653926 /* sureCamera@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		754C3C082BB1095700653926 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		754C3C122BB1095700653926 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		754C3BEB2BB1095600653926 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				754C3C442BB10F3D00653926 /* CameraViewController.m in Sources */,
+				754C3BFA2BB1095600653926 /* ViewController.m in Sources */,
+				754C3BF42BB1095600653926 /* AppDelegate.m in Sources */,
+				754C3C592BB10F3D00653926 /* TKImageView.m in Sources */,
+				754C3C432BB10F3D00653926 /* ClipViewController.m in Sources */,
+				754C3C052BB1095700653926 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		754C3C062BB1095700653926 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				754C3C0F2BB1095700653926 /* Album_clipping_editorTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		754C3C102BB1095700653926 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				754C3C192BB1095700653926 /* Album_clipping_editorUITests.m in Sources */,
+				754C3C1B2BB1095700653926 /* Album_clipping_editorUITestsLaunchTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		754C3C0C2BB1095700653926 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 754C3BEE2BB1095600653926 /* Album-clipping-editor */;
+			targetProxy = 754C3C0B2BB1095700653926 /* PBXContainerItemProxy */;
+		};
+		754C3C162BB1095700653926 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 754C3BEE2BB1095600653926 /* Album-clipping-editor */;
+			targetProxy = 754C3C152BB1095700653926 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		754C3BFB2BB1095600653926 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				754C3BFC2BB1095600653926 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		754C3C002BB1095700653926 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				754C3C012BB1095700653926 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		754C3C1C2BB1095700653926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		754C3C1D2BB1095700653926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		754C3C1F2BB1095700653926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6XBL5ZBVM6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Album-clipping-editor/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Dison.Album-clipping-editor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		754C3C202BB1095700653926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6XBL5ZBVM6;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Album-clipping-editor/Info.plist";
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Dison.Album-clipping-editor";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		754C3C222BB1095700653926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Dison.Album-clipping-editorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Album-clipping-editor.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Album-clipping-editor";
+			};
+			name = Debug;
+		};
+		754C3C232BB1095700653926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Dison.Album-clipping-editorTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Album-clipping-editor.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Album-clipping-editor";
+			};
+			name = Release;
+		};
+		754C3C252BB1095700653926 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Dison.Album-clipping-editorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Album-clipping-editor";
+			};
+			name = Debug;
+		};
+		754C3C262BB1095700653926 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Dison.Album-clipping-editorUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "Album-clipping-editor";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		754C3BEA2BB1095600653926 /* Build configuration list for PBXProject "Album-clipping-editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				754C3C1C2BB1095700653926 /* Debug */,
+				754C3C1D2BB1095700653926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		754C3C1E2BB1095700653926 /* Build configuration list for PBXNativeTarget "Album-clipping-editor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				754C3C1F2BB1095700653926 /* Debug */,
+				754C3C202BB1095700653926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		754C3C212BB1095700653926 /* Build configuration list for PBXNativeTarget "Album-clipping-editorTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				754C3C222BB1095700653926 /* Debug */,
+				754C3C232BB1095700653926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		754C3C242BB1095700653926 /* Build configuration list for PBXNativeTarget "Album-clipping-editorUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				754C3C252BB1095700653926 /* Debug */,
+				754C3C262BB1095700653926 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 754C3BE72BB1095600653926 /* Project object */;
+}
