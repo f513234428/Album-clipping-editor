@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AlbumBaseController.h"
 
 @protocol CameraDelegate <NSObject>
 
@@ -14,7 +15,7 @@
 
 @end
 
-@interface CameraViewController : UIViewController
+@interface CameraViewController : AlbumBaseController
 
 @property (nonatomic, weak)id<CameraDelegate> delegate;
 

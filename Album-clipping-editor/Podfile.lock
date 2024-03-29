@@ -1,0 +1,30 @@
+PODS:
+  - HXPhotoPicker (3.3.2):
+    - HXPhotoPicker/Default (= 3.3.2)
+  - HXPhotoPicker/Default (3.3.2)
+  - JSBadgeView (2.0.0)
+  - Masonry (1.1.0)
+  - OpenCV2 (4.3.0)
+
+DEPENDENCIES:
+  - HXPhotoPicker (~> 3.3.2)
+  - JSBadgeView (~> 2.0.0)
+  - Masonry (~> 1.1.0)
+  - OpenCV2
+
+SPEC REPOS:
+  trunk:
+    - HXPhotoPicker
+    - JSBadgeView
+    - Masonry
+    - OpenCV2
+
+SPEC CHECKSUMS:
+  HXPhotoPicker: 3d0526bc46cd2a4510a777d5f57dfad8e683fcfd
+  JSBadgeView: 3f5691b7d1bfacfb0237d0eb3b8b1f9a10ecb3f7
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  OpenCV2: ffe82e5cb5d16dc3fc01a5f4127b9a5b3cfc7d1b
+
+PODFILE CHECKSUM: 3502acafed0326fefdac9b6b2064708533367ac0
+
+COCOAPODS: 1.14.2

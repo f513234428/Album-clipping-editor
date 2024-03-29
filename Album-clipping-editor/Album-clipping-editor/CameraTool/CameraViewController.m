@@ -9,70 +9,15 @@
 #import "CameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "ClipViewController.h"
-#define KWIDTH [UIScreen mainScreen].bounds.size.width
-#define KHEIGHT [UIScreen mainScreen].bounds.size.height
+#import <Photos/Photos.h>
+#import <HXPhotoPicker.h>
+#import "ReLayoutButton.h"
+#import <JSBadgeView.h>
+#import "AlbumPictureArrView.h"
+#import <Masonry.h>
+#import "LHGOpenCVEditingViewController.h"
 
-#ifndef weakify
-#if DEBUG
-    #if __has_feature(objc_arc)
-    #define weakify(object) autoreleasepool{} __weak __typeof__(object) weak##_##object = object;
-    #else
-    #define weakify(object) autoreleasepool{} __block __typeof__(object) block##_##object = object;
-    #endif
-#else
-    #if __has_feature(objc_arc)
-    #define weakify(object) try{} @finally{} {} __weak __typeof__(object) weak##_##object = object;
-    #else
-    #define weakify(object) try{} @finally{} {} __block __typeof__(object) block##_##object = object;
-    #endif
-#endif
-#endif
-
-#ifndef strongify
-        #if DEBUG
-            #if __has_feature(objc_arc)
-            #define strongify(object) autoreleasepool{} __typeof__(object) object = weak##_##object;
-            #else
-            #define strongify(object) autoreleasepool{} __typeof__(object) object = block##_##object;
-            #endif
-        #else
-            #if __has_feature(objc_arc)
-            #define strongify(object) try{} @finally{} __typeof__(object) object = weak##_##object;
-            #else
-            #define strongify(object) try{} @finally{} __typeof__(object) object = block##_##object;
-            #endif
-        #endif
-    #endif
-
-@interface CameraViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,ClipPhotoDelegate>
-
-/**
- *  AVCaptureSession对象来执行输入设备和输出设备之间的数据传递
- */
-@property (nonatomic, strong) AVCaptureSession* session;
-/**
- *  输入设备
- */
-@property (nonatomic, strong) AVCaptureDeviceInput* videoInput;
-/**
- *  照片输出流
- */
-@property (nonatomic, strong) AVCaptureStillImageOutput* stillImageOutput;
-/**
- *  预览图层
- */
-@property (nonatomic, strong) AVCaptureVideoPreviewLayer* previewLayer;
-
-/**
- *  记录开始的缩放比例
- */
-@property(nonatomic,assign)CGFloat beginGestureScale;
-/**
- * 最后的缩放比例
- */
-@property(nonatomic,assign)CGFloat effectiveScale;
-
+@interface CameraViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,HXPhotoViewDelegate,LHGOpenCVEditingViewControllerDelegate>
 @property (nonatomic, strong) AVCaptureConnection *stillImageConnection;
 
 @property (nonatomic, strong) NSData  *jpegData;
@@ -84,126 +29,139 @@
 @property (nonatomic, strong) UIView *editorView;
 
 @property (nonatomic, strong) UIImagePickerController *imgPicker;
-@property(nonatomic, strong) dispatch_queue_t sessionQueue;
+@property (nonatomic, strong) dispatch_queue_t sessionQueue;
 
+@property(nonatomic, assign) BOOL original;
+@property(nonatomic, strong) NSMutableArray *selectList;
+@property(nonatomic, strong) HXPhotoManager *photoManager;
+@property(nonatomic, strong) AlbumPictureArrView *photoBtn;
+@property(nonatomic, strong) ReLayoutButton *withdrawBtn;
+@property(nonatomic, strong) JSBadgeView *badgeView;
+@property(nonatomic, assign) BOOL isTakePicture;
+@property(nonatomic, strong) AlbumPictureArrView *photoArrBtnView;
 @end
 
 @implementation CameraViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    [self CreatedCamera];
-//    [self selectImageFrromCamera];
+    self.view.backgroundColor = [UIColor whiteColor];
+    self.selectList = [[NSMutableArray alloc] init];
+    [self getPhotoLibraryAuthorization];
     [self createQueue];
     [self initAVCaptureSession];
     [self setUpGesture];
     [self createdTool];
+    
 }
+
 - (void)createQueue{
+    //单独弄一个线程管理摄像头启动,不会有警报
     dispatch_queue_t sessionQueue = dispatch_queue_create("camera session queue", DISPATCH_QUEUE_SERIAL);
     self.sessionQueue = sessionQueue;
 }
 
 - (void)createdTool
 {
-    UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, KWIDTH, 64)];
-    headerView.backgroundColor = [UIColor blackColor];
-    headerView.alpha = 0.7;
+    UIView *headerView = [[UIView alloc] init];
+    headerView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
     [self.view addSubview:headerView];
+    [headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.mas_equalTo(self.view);
+        make.top.mas_equalTo(self.view);
+        make.height.mas_equalTo(64 + STATUS_HEIGHT);
+    }];
     
-    UILabel *titleLable = [[UILabel alloc] initWithFrame:CGRectMake((KWIDTH - 100)/2.0, 12, 100, 40)];
-    titleLable.text = @"";
-    [titleLable setTextColor:[UIColor whiteColor]];
-    titleLable.textAlignment = NSTextAlignmentCenter;
-    [headerView addSubview:titleLable];
-
     UIButton *headerBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    headerBtn.frame = CGRectMake(10, 20, 80, 40);
-//    [headerBtn setTitle:@"取消" forState:UIControlStateNormal];
     [headerBtn setImage:[UIImage imageNamed:@"cancle"] forState:UIControlStateNormal];
     [headerBtn addTarget:self action:@selector(cancleCamera) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:headerBtn];
     [self.navigationController.navigationBar.subviews.lastObject setHidden:YES];
-    
+    [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(headerView);
+        make.bottom.mas_equalTo(headerView).mas_offset(-15);
+        make.left.mas_equalTo(headerView).mas_offset(20);
+        make.width.height.mas_equalTo(40);
+    }];
     
     UIButton *lampBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    lampBtn.frame = CGRectMake(((KWIDTH / 2.0) - 30)/2.0 + (KWIDTH /2.0), ((120) - 30)/ 2.0, 30, 30);
-    lampBtn.frame = CGRectMake(KWIDTH -  80 - 10, 20, 80, 40);
     [lampBtn setImage:[UIImage imageNamed:@"openFlish"] forState:UIControlStateSelected];
     [lampBtn setImage:[UIImage imageNamed:@"closeFlish"] forState:UIControlStateNormal];
     [lampBtn addTarget:self action:@selector(flashButtonClick:) forControlEvents:UIControlEventTouchUpInside];
     [headerView addSubview:lampBtn];
     [self.navigationController.navigationBar.subviews.lastObject setHidden:YES];
-
+    [lampBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.centerY.mas_equalTo(headerView);
+        make.bottom.mas_equalTo(headerView).mas_offset(-15);
+        make.right.mas_equalTo(headerView).mas_offset(-20);
+        make.width.height.mas_equalTo(40);
+    }];
     
-    self.toolView = [[UIView alloc] initWithFrame:CGRectMake(0, KHEIGHT - 120, KWIDTH, 120)];
-    self.toolView.backgroundColor = [UIColor blackColor];
-    self.toolView.alpha = 0.7;
+    self.toolView = [[UIView alloc] init];
+    self.toolView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.7];
     [self.view addSubview:self.toolView];
+    [self.toolView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.left.width.mas_equalTo(self.view);
+        make.height.mas_equalTo(120);
+    }];
     
     UIButton *cameraBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    cameraBtn.frame = CGRectMake((KWIDTH - 50)/2.0, (120 - 50)/ 2.0, 50, 50);
     [cameraBtn setImage:[UIImage imageNamed:@"takePhoto"] forState:UIControlStateNormal];
     [cameraBtn addTarget:self action:@selector(takePhotoButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [self.toolView addSubview:cameraBtn];
+    [cameraBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.mas_equalTo(self.toolView);
+        make.width.height.mas_equalTo(72);
+    }];
     
-    UIButton *photoBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    photoBtn.frame = CGRectMake(((KWIDTH / 2.0) - 60)/2.0, ((120) - 30)/ 2.0, 30, 30);
-    [photoBtn addTarget:self action:@selector(openCamera) forControlEvents:UIControlEventTouchUpInside];
-    [photoBtn setImage:[UIImage imageNamed:@"cameraPhoto"] forState:UIControlStateNormal];
-    [self.toolView addSubview:photoBtn];
-
-
-
+    self.photoBtn = [[AlbumPictureArrView alloc] init];
+    self.photoBtn.photoLabel.text = @"Local Upload";
+    [self.photoBtn.photoView setImage:[UIImage imageNamed:@"cameraPhoto"] ];
+    [self.photoBtn setPhotoStyle];
+    @weakify(self);
+    //点击回调
+    [self.photoBtn tapActionGesture:^{
+        [weak_self openCamera];
+    }];
     
-}
-
-- (void)initAVCaptureSession{
+    [self.toolView addSubview:self.photoBtn];
+    [self.photoBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(20);
+        make.centerY.mas_equalTo(self.toolView);
+        make.width.height.mas_equalTo(72);
+    }];
     
-    self.session = [[AVCaptureSession alloc] init];
+    self.withdrawBtn = [[ReLayoutButton alloc] init];
+    [self.withdrawBtn setImage:[UIImage imageNamed:@"backPhoto"] forState:UIControlStateNormal];
+    [self.withdrawBtn addTarget:self action:@selector(withdrawAction) forControlEvents:UIControlEventTouchUpInside];
+    self.withdrawBtn.hidden = YES;
+    [self.toolView addSubview:self.withdrawBtn];
+    [self.withdrawBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(20);
+        make.centerY.mas_equalTo(self.toolView);
+        make.width.height.mas_equalTo(72);
+    }];
     
-    NSError *error;
+    [self.photoArrBtnView.photoView setImage:[UIImage imageNamed:@"cameraPhoto"] ];
+    self.photoArrBtnView.hidden = YES;
+    [self.toolView addSubview:self.photoArrBtnView];
+    [self.photoArrBtnView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.right.mas_equalTo(self.toolView).offset(-20);
+        make.centerY.mas_equalTo(self.toolView);
+        make.width.height.mas_equalTo(72);
+    }];
+    //点击回调
+    [self.photoArrBtnView tapActionGesture:^{
+        [weak_self jumpPictureReaderView];
+    }];
     
-    self.effectiveScale = 1.0;
-    
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    
-    //更改这个设置的时候必须先锁定设备，修改完后再解锁，否则崩溃
-    [device lockForConfiguration:nil];
-    
-    [device unlockForConfiguration];
-    
-    self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
-    if (error) {
-        NSLog(@"%@",error);
-    }
-    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-    //输出设置。AVVideoCodecJPEG   输出jpeg格式图片
-    NSDictionary * outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey, nil];
-    [self.stillImageOutput setOutputSettings:outputSettings];
-    
-    if ([self.session canAddInput:self.videoInput]) {
-        [self.session addInput:self.videoInput];
-    }
-    if ([self.session canAddOutput:self.stillImageOutput]) {
-        [self.session addOutput:self.stillImageOutput];
-    }
-    
-    //初始化预览图层
-    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
-    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-
-    self.previewLayer.frame = CGRectMake(0, 0,KWIDTH, KHEIGHT);
-    self.view.layer.masksToBounds = YES;
-    [self.view.layer addSublayer:self.previewLayer];
-    
-    [self resetFocusAndExposureModes];
 }
 
 - (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:YES];
-    
+    [self.navigationController setNavigationBarHidden:true animated:animated];
+
+
     if (self.session) {
         @weakify(self);
         dispatch_async(self.sessionQueue, ^{
@@ -213,42 +171,17 @@
     }
 }
 
-
 - (void)viewDidDisappear:(BOOL)animated{
     
     [super viewDidDisappear:YES];
+    [self.navigationController setNavigationBarHidden:false animated:animated];
+
     if (self.session) {
         @weakify(self);
         dispatch_async(self.sessionQueue, ^{
             @strongify(self);
             [self.session stopRunning];
         });
-    }
-}
-//自动聚焦、曝光
-- (BOOL)resetFocusAndExposureModes{
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    AVCaptureExposureMode exposureMode = AVCaptureExposureModeContinuousAutoExposure;
-    AVCaptureFocusMode focusMode = AVCaptureFocusModeContinuousAutoFocus;
-    BOOL canResetFocus = [device isFocusPointOfInterestSupported] && [device isFocusModeSupported:focusMode];
-    BOOL canResetExposure = [device isExposurePointOfInterestSupported] && [device isExposureModeSupported:exposureMode];
-    CGPoint centerPoint = CGPointMake(0.5f, 0.5f);
-    NSError *error;
-    if ([device lockForConfiguration:&error]) {
-        if (canResetFocus) {
-            device.focusMode = focusMode;
-            device.focusPointOfInterest = centerPoint;
-        }
-        if (canResetExposure) {
-            device.exposureMode = exposureMode;
-            device.exposurePointOfInterest = centerPoint;
-        }
-        [device unlockForConfiguration];
-        return YES;
-    }
-    else{
-        NSLog(@"%@", error);
-        return NO;
     }
 }
 
@@ -258,72 +191,104 @@
     CGPoint point = [touch locationInView:self.view];
     [self focusAtPoint:point];
 }
-//聚焦
-- (void)focusAtPoint:(CGPoint)point {
-    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-    if ([self cameraSupportsTapToFocus] && [device isFocusModeSupported:AVCaptureFocusModeAutoFocus]) {
-        NSError *error;
-        if ([device lockForConfiguration:&error]) {
-            device.focusPointOfInterest = point;
-            device.focusMode = AVCaptureFocusModeAutoFocus;
-            [device unlockForConfiguration];
-        }
-        else{
-            NSLog(@"%@", error);
 
+- (void)getPhotoLibraryAuthorization {
+    [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+        if(status == PHAuthorizationStatusAuthorized) {
+            [self getFirstPhoto]; //用户同意了
         }
+    }];
+}
+
+- (void)getFirstPhoto {
+    PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+    fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    PHFetchResult *fetchResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:fetchOptions];
+    if (fetchResult.count > 0) {
+        PHAsset *firstAsset = fetchResult.lastObject;
+        [[PHImageManager defaultManager] requestImageForAsset:firstAsset
+                                                   targetSize:PHImageManagerMaximumSize
+                                                  contentMode:PHImageContentModeDefault
+                                                      options:nil
+                                                resultHandler:^(UIImage *image, NSDictionary *info) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                // 使用这张图片
+//                UIImage *compressionImg = [CameraViewController compressImage:image toTargetWidth:200];
+                UIImage *compressionImg = [CameraViewController reSizeImageData:image maxImageSize:150 maxSizeWithKB:50];
+//                UIImage *compressionImg = [image hx_scaleToFitSize:CGSizeMake(50, 50)];
+                [self.photoBtn.photoView setImage: compressionImg];
+
+            });
+        }];
     }
 }
 
-- (BOOL)cameraSupportsTapToFocus {
-    return [[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] isFocusPointOfInterestSupported];
-}
-
-//获取设备方向
--(AVCaptureVideoOrientation)avOrientationForDeviceOrientation:(UIDeviceOrientation)deviceOrientation
-{
-    AVCaptureVideoOrientation result = (AVCaptureVideoOrientation)deviceOrientation;
-    if ( deviceOrientation == UIDeviceOrientationLandscapeLeft )
-        result = AVCaptureVideoOrientationLandscapeRight;
-    else if ( deviceOrientation == UIDeviceOrientationLandscapeRight )
-        result = AVCaptureVideoOrientationLandscapeLeft;
-    return result;
-}
 //照相
 - (void)takePhotoButtonClick {
     _stillImageConnection = [self.stillImageOutput        connectionWithMediaType:AVMediaTypeVideo];
     UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
     AVCaptureVideoOrientation avcaptureOrientation = [self avOrientationForDeviceOrientation:curDeviceOrientation];
     [_stillImageConnection setVideoOrientation:avcaptureOrientation];
-    [_stillImageConnection setVideoScaleAndCropFactor:self.effectiveScale];
     
     [self.stillImageOutput captureStillImageAsynchronouslyFromConnection:_stillImageConnection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
         
         NSData *jpegData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
-        
-        [self jumpImageView:jpegData];
-        
-    }];
+        UIImage *image = [UIImage imageWithData:jpegData];
+        HXPhotoModel *model = [HXPhotoModel photoModelWithImage:image];
+        [self.selectList addObject:model];
 
-    
-    
-    
+        self.isTakePicture = YES;
+        [self dealWithTakePicture];
+    }];
+}
+
+- (void) dealWithTakePicture {
+    if (self.isTakePicture ) {
+        [self getPhotoArrLast];
+        self.photoBtn.hidden = YES;
+        self.withdrawBtn.hidden = NO;
+        self.photoArrBtnView.hidden = NO;
+    } else {
+        self.photoBtn.hidden = NO;
+        self.withdrawBtn.hidden = YES;
+        self.photoArrBtnView.hidden = YES;
+    }
+}
+
+//撤回
+- (void)withdrawAction {
+    if (self.selectList.count != 0) {
+        [self.selectList removeLastObject];
+    }
+    if (self.selectList.count == 0) {
+        self.isTakePicture = NO;
+        self.badgeView.badgeText = nil;
+    } else {
+        self.isTakePicture = YES;
+    }
+    [self dealWithTakePicture];
+}
+
+- (void)getPhotoArrLast {
+    HXPhotoModel *model = self.selectList.lastObject;
+    UIImage *compressionImg = [CameraViewController reSizeImageData:model.previewPhoto maxImageSize:50 maxSizeWithKB:100];
+    [self.photoArrBtnView.photoView setImage:compressionImg];
+
+    self.badgeView.badgeText = [NSString stringWithFormat:@"%lu",(unsigned long)self.selectList.count];
+
 }
 
 //拍照之后调到相片详情页面
--(void)jumpImageView:(NSData*)data{
-    ClipViewController *viewController = [[ClipViewController alloc] init];
-    UIImage *image = [UIImage imageWithData:data];
-    viewController.image = image;
-    viewController.picker = _imgPicker;
-    viewController.controller = self;
-    viewController.delegate = self;
-    viewController.isTakePhoto = YES;
-
-    [self presentViewController:viewController animated:NO completion:nil];
+-(void)jumpPictureReaderView{
+    LHGOpenCVEditingViewController *vc = [[LHGOpenCVEditingViewController alloc] init];
+    vc.delegate = self;
+    HXPhotoModel *photoModel = self.selectList.lastObject;
+    vc.originImage = photoModel.previewPhoto;
+    NSLog(@"跳转相片详情页面");
+    [self.navigationController pushViewController:vc animated:YES];
     
 }
-
 
 - (void)cancleCamera
 {
@@ -339,32 +304,6 @@
     }
 }
 
-
-
-//打开闪光灯
-- (void)flashButtonClick:(UIButton *)sender {
-    
-    sender.selected = !sender.selected;
-    if (sender.isSelected == YES) { //打开闪光灯
-        AVCaptureDevice *captureDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        NSError *error = nil;
-        
-        if ([captureDevice hasTorch]) {
-            BOOL locked = [captureDevice lockForConfiguration:&error];
-            if (locked) {
-                captureDevice.torchMode = AVCaptureTorchModeOn;
-                [captureDevice unlockForConfiguration];
-            }
-        }
-    }else{//关闭闪光灯
-        AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        if ([device hasTorch]) {
-            [device lockForConfiguration:nil];
-            [device setTorchMode: AVCaptureTorchModeOff];
-            [device unlockForConfiguration];
-        }
-    }
-}
 //添加手势代理
 - (void)setUpGesture
 {
@@ -373,103 +312,14 @@
     [self.view addGestureRecognizer:pinch];
 }
 
-//缩放手势 用于调整焦距
-- (void)handlePinchGesture:(UIPinchGestureRecognizer *)recognizer{
-    
-    BOOL allTouchesAreOnThePreviewLayer = YES;
-    NSUInteger numTouches = [recognizer numberOfTouches], i;
-    for ( i = 0; i < numTouches; ++i ) {
-        CGPoint location = [recognizer locationOfTouch:i inView:self.view];
-        CGPoint convertedLocation = [self.previewLayer convertPoint:location fromLayer:self.previewLayer.superlayer];
-        if ( ! [self.previewLayer containsPoint:convertedLocation] ) {
-            allTouchesAreOnThePreviewLayer = NO;
-            break;
-        }
-    }
-    
-    if ( allTouchesAreOnThePreviewLayer ) {
-        
-        
-        self.effectiveScale = self.beginGestureScale * recognizer.scale;
-        if (self.effectiveScale < 1.0){
-            self.effectiveScale = 1.0;
-        }
-        
-        NSLog(@"%f-------------->%f------------recognizerScale%f",self.effectiveScale,self.beginGestureScale,recognizer.scale);
-        
-        CGFloat maxScaleAndCropFactor = [[self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo] videoMaxScaleAndCropFactor];
-        
-        NSLog(@"%f",maxScaleAndCropFactor);
-        if (self.effectiveScale > maxScaleAndCropFactor)
-            self.effectiveScale = maxScaleAndCropFactor;
-        
-        [CATransaction begin];
-        [CATransaction setAnimationDuration:.025];
-        [self.previewLayer setAffineTransform:CGAffineTransformMakeScale(self.effectiveScale, self.effectiveScale)];
-        [CATransaction commit];
-        
-    }
-    
-}
-
-- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
-{
-    if ( [gestureRecognizer isKindOfClass:[UIPinchGestureRecognizer class]] ) {
-        self.beginGestureScale = self.effectiveScale;
-    }
-    return YES;
-}
-
 //打开相册
 - (void)openCamera
 {
-    [self openImagePickerControllerWithType:UIImagePickerControllerSourceTypeSavedPhotosAlbum];
+    @weakify(self);
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self hx_presentSelectPhotoControllerWithManager:self.photoManager delegate:self];
+    });
 }
-
-
-/// 打开ImagePickerController的方法
-- (void)openImagePickerControllerWithType:(UIImagePickerControllerSourceType)type
-{
-    // 设备不可用  直接返回
-    if (![UIImagePickerController isSourceTypeAvailable:type]) return;
-    
-    _imgPicker = [[UIImagePickerController alloc] init];
-    _imgPicker.sourceType = type;
-    _imgPicker.delegate = self;
-    _imgPicker.allowsEditing = NO;
-    [self presentViewController:_imgPicker animated:YES completion:nil];
-}
-
-#pragma mark - UINavigationControllerDelegate, UIImagePickerControllerDelegate
-// 选择照片之后
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info
-{
-    
-    UIImage *image = info[UIImagePickerControllerOriginalImage];
-    [self cropImage:image];
-    
-    
-}
-
-/**
- 相册代理取消操作
- 
- @param picker 相册对象
- */
-- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
-    [picker dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)cropImage: (UIImage *)image {
-    ClipViewController *viewController = [[ClipViewController alloc] init];
-    viewController.image = image;
-    viewController.picker = _imgPicker;
-    viewController.controller = self;
-    viewController.delegate = self;
-    viewController.isTakePhoto = NO;
-    [_imgPicker presentViewController:viewController animated:NO completion:nil];
-}
-
 
 #pragma mark -- ClipPhotoDelegate
 - (void)clipPhoto:(UIImage *)image
@@ -480,5 +330,47 @@
     }
 }
 
+#pragma mark -- HXPhotoViewDelegate
+- (void)photoView:(HXPhotoView *)photoView changeComplete:(NSArray<HXPhotoModel *> *)allList photos:(NSArray<HXPhotoModel *> *)photos videos:(NSArray<HXPhotoModel *> *)videos original:(BOOL)isOriginal {
+    self.original = isOriginal;
+    self.selectList = [NSMutableArray arrayWithArray:allList];
+    NSSLog(@"%@,%lu",allList,(unsigned long)allList.count);
+}
 
+#pragma mark - LHGOpenCVEditingViewControllerDelegate
+
+- (void)editingController:(LHGOpenCVEditingViewController *)editor didFinishCropping:(UIImage *)finalCropImage {
+    UIImageView *imageView = (UIImageView *)[self.view viewWithTag:500];
+    imageView.image = finalCropImage;
+    NSSLog(@"LHGOpenCV回调--%@",imageView);
+
+}
+
+- (HXPhotoManager *)photoManager {
+    if (!_photoManager) {
+        _photoManager = [HXPhotoManager managerWithType:HXPhotoManagerSelectedTypePhoto];
+        _photoManager.configuration.saveSystemAblum = YES;
+        _photoManager.configuration.photoMaxNum = 0;
+        _photoManager.configuration.videoMaxNum = 0;
+        _photoManager.configuration.maxNum = 10;
+        _photoManager.configuration.selectTogether = NO;
+        _photoManager.configuration.photoCanEdit = YES;
+        _photoManager.configuration.videoCanEdit = NO;
+    }
+    return _photoManager;
+}
+
+- (JSBadgeView *)badgeView {
+    if (!_badgeView) {
+        _badgeView = [[JSBadgeView alloc] initWithParentView:self.photoArrBtnView.photoBGView alignment:JSBadgeViewAlignmentTopRight];
+        _badgeView.badgeBackgroundColor = KBadgeColor;
+    }
+    return _badgeView;
+}
+- (AlbumPictureArrView *)photoArrBtnView {
+    if (!_photoArrBtnView) {
+        _photoArrBtnView = [[AlbumPictureArrView alloc] init];
+    }
+    return _photoArrBtnView;
+}
 @end
