@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVUtils.m
+//  A4Utils.m
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
@@ -19,10 +19,10 @@
 #include <opencv2/imgcodecs/ios.h>
 #include <algorithm>
 
-#import "LHGOpenCVUtils.h"
-#import "LHGOpenCVDefines.h"
+#import "A4Utils.h"
+#import "A4Defines.h"
 
-@implementation LHGOpenCVUtils
+@implementation A4Utils
 
 using namespace std;
 using namespace cv;

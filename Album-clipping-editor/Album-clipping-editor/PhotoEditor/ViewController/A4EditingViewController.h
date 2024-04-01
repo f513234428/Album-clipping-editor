@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVEditingViewController.h
+//  A4EditingViewController.h
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
@@ -9,20 +9,20 @@
 #import <UIKit/UIKit.h>
 #import "HXPhotoModel.h"
 
-@class LHGOpenCVEditingViewController;
+@class A4EditingViewController;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol LHGOpenCVEditingViewControllerDelegate <NSObject>
+@protocol A4EditingViewControllerDelegate <NSObject>
 
 @optional
-//- (void)editingController:(LHGOpenCVEditingViewController *)editor didFinishCropping:(UIImage *)finalCropImage;
+//- (void)editingController:(A4EditingViewController *)editor didFinishCropping:(UIImage *)finalCropImage;
 
 @end
 
-@interface LHGOpenCVEditingViewController : UIViewController
+@interface A4EditingViewController : UIViewController
 
-@property (nonatomic, weak) id<LHGOpenCVEditingViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<A4EditingViewControllerDelegate> delegate;
 
 //@property (nonatomic, strong) UIImage *originImage;
 @property(nonatomic, strong) HXPhotoModel *originPhoto;

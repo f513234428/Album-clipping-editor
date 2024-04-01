@@ -1,5 +1,5 @@
 //
-//  AlbumBaseController.h
+//  A4AlbumBaseController.h
 //  Album-clipping-editor
 //
 //  Created by syz on 2024/3/25.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface AlbumBaseController : UIViewController
+@interface A4AlbumBaseController : UIViewController
 /**
  *  AVCaptureSession对象来执行输入设备和输出设备之间的数据传递
  */
@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  照片输出流
  */
 @property (nonatomic, strong) AVCaptureStillImageOutput* stillImageOutput;
+@property(nonatomic, strong) AVCapturePhotoSettings *outputSettings;
 
 +(UIImage*)compressImage:(UIImage*)sourceImage toTargetWidth:(CGFloat)targetHeight;
 + (UIImage *)reSizeImageData:(UIImage *)sourceImage maxImageSize:(CGFloat)maxImageSize maxSizeWithKB:(CGFloat) maxSize;

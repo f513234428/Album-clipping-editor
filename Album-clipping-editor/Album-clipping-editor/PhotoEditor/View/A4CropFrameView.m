@@ -1,36 +1,36 @@
 //
-//  LHGOpenCVCropFrameView.m
+//  A4CropFrameView.m
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
 //  Copyright © 2020 lihuaguang. All rights reserved.
 //
 
-#import "LHGOpenCVCropFrameView.h"
-#import "LHGOpenCVCropCornerView.h"
+#import "A4CropFrameView.h"
+#import "A4CropCornerView.h"
 #import "UIImageView+LHGContentRect.h"
 
 #define kCropButtonSize 20
 #define kCropButtonMargin 40
 
-@interface LHGOpenCVCropFrameView () <UIGestureRecognizerDelegate>
+@interface A4CropFrameView () <UIGestureRecognizerDelegate>
 
-@property (nonatomic, strong, readwrite) LHGOpenCVCropCornerView *topLeftView;
-@property (nonatomic, strong, readwrite) LHGOpenCVCropCornerView *topRightView;
-@property (nonatomic, strong, readwrite) LHGOpenCVCropCornerView *bottomLeftView;
-@property (nonatomic, strong, readwrite) LHGOpenCVCropCornerView *bottomRightView;
-@property (nonatomic, weak) LHGOpenCVCropCornerView *activeCornerView;
+@property (nonatomic, strong, readwrite) A4CropCornerView *topLeftView;
+@property (nonatomic, strong, readwrite) A4CropCornerView *topRightView;
+@property (nonatomic, strong, readwrite) A4CropCornerView *bottomLeftView;
+@property (nonatomic, strong, readwrite) A4CropCornerView *bottomRightView;
+@property (nonatomic, weak) A4CropCornerView *activeCornerView;
 @property (nonatomic, copy) NSArray <UIView*> *allCornerViews;
 
-@property (nonatomic, strong) LHGOpenCVCropCornerView *topCenterView;
-@property (nonatomic, strong) LHGOpenCVCropCornerView *bottomCenterView;
-@property (nonatomic, strong) LHGOpenCVCropCornerView *leftCenterView;
-@property (nonatomic, strong) LHGOpenCVCropCornerView *rightCenterView;
+@property (nonatomic, strong) A4CropCornerView *topCenterView;
+@property (nonatomic, strong) A4CropCornerView *bottomCenterView;
+@property (nonatomic, strong) A4CropCornerView *leftCenterView;
+@property (nonatomic, strong) A4CropCornerView *rightCenterView;
 
 @property(nonatomic, strong) NSMutableArray *originalPositions;//坐标保存数组
 @end
 
-@implementation LHGOpenCVCropFrameView
+@implementation A4CropFrameView
 @synthesize lineSuccessColor = _lineSuccessColor;
 @synthesize cornerFillColor = _cornerFillColor;
 
@@ -134,51 +134,51 @@
     CGPoint p1;
     CGPoint p2;
     CGPoint p3;
-    for (LHGOpenCVCropCornerView *cornerView in self.allCornerViews) {
+    for (A4CropCornerView *cornerView in self.allCornerViews) {
         switch (cornerView.cornerType) {
-            case LHGOpenCVCornerTypeTopLeft:{
+            case A4CornerTypeTopLeft:{
                 p1 = self.topLeftView.point;
                 p2 = self.topCenterView.point;
                 p3 = self.leftCenterView.point;
                 break;
             }
-            case LHGOpenCVCornerTypeTopRight:{
+            case A4CornerTypeTopRight:{
                 p1 = self.topRightView.point;
                 p2 = self.rightCenterView.point;
                 p3 = self.topCenterView.point;
                 break;
             }
-            case LHGOpenCVCornerTypeBottomRight:{
+            case A4CornerTypeBottomRight:{
                 p1 = self.bottomRightView.point;
                 p2 = self.bottomCenterView.point;
                 p3 = self.rightCenterView.point;
                 break;
             }
-            case LHGOpenCVCornerTypeBottomLeft:{
+            case A4CornerTypeBottomLeft:{
                 p1 = self.bottomLeftView.point;
                 p2 = self.leftCenterView.point;
                 p3 = self.bottomCenterView.point;
                 break;
             }
-//            case LHGOpenCVCornerTypeTopCenter:{
+//            case A4CornerTypeTopCenter:{
 //                p1 = self.topCenterView.point;
 //                p2 = self.topRightView.point;
 //                p3 = self.topLeftView.point;
 //                break;
 //            }
-//            case LHGOpenCVCornerTypeBottomCenter:{
+//            case A4CornerTypeBottomCenter:{
 //                p1 = self.bottomCenterView.point;
 //                p2 = self.bottomLeftView.point;
 //                p3 = self.bottomRightView.point;
 //                break;
 //            }
-//            case LHGOpenCVCornerTypeLeftCenter:{
+//            case A4CornerTypeLeftCenter:{
 //                p1 = self.leftCenterView.point;
 //                p2 = self.topLeftView.point;
 //                p3 = self.bottomLeftView.point;
 //                break;
 //            }
-//            case LHGOpenCVCornerTypeRightCenter:{
+//            case A4CornerTypeRightCenter:{
 //                p1 = self.rightCenterView.point;
 //                p2 = self.bottomRightView.point;
 //                p3 = self.topRightView.point;
@@ -238,7 +238,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     CGPoint location = [touch locationInView:self];
-    for (LHGOpenCVCropCornerView *cornerView in self.allCornerViews) {
+    for (A4CropCornerView *cornerView in self.allCornerViews) {
         CGPoint covertPoint = [self convertPoint:location toView:cornerView];
         if (CGRectContainsPoint(cornerView.bounds, covertPoint)) {
             self.activeCornerView = cornerView;
@@ -250,24 +250,24 @@
 
 #pragma mark - Public
 
-- (void)updatePointValue:(CGPoint)point cornerType:(LHGOpenCVCornerType)cornerType {
+- (void)updatePointValue:(CGPoint)point cornerType:(A4CornerType)cornerType {
     switch (cornerType) {
-        case LHGOpenCVCornerTypeTopLeft: {
+        case A4CornerTypeTopLeft: {
             self.topLeftView.point = point;
             [self setNeedsDisplay];
             break;
         }
-        case LHGOpenCVCornerTypeTopRight: {
+        case A4CornerTypeTopRight: {
             self.topRightView.point = point;
             [self setNeedsDisplay];
             break;
         }
-        case LHGOpenCVCornerTypeBottomLeft: {
+        case A4CornerTypeBottomLeft: {
             self.bottomLeftView.point = point;
             [self setNeedsDisplay];
             break;
         }
-        case LHGOpenCVCornerTypeBottomRight: {
+        case A4CornerTypeBottomRight: {
             self.bottomRightView.point = point;
             [self setNeedsDisplay];
             break;
@@ -278,30 +278,30 @@
     }
 }
 
-- (CGPoint)pointValueWithCornerType:(LHGOpenCVCornerType)cornerType {
+- (CGPoint)pointValueWithCornerType:(A4CornerType)cornerType {
     switch (cornerType) {
-        case LHGOpenCVCornerTypeTopLeft: {
+        case A4CornerTypeTopLeft: {
             return self.topLeftView.point;
         }
-        case LHGOpenCVCornerTypeTopRight: {
+        case A4CornerTypeTopRight: {
             return self.topRightView.point;
         }
-        case LHGOpenCVCornerTypeBottomLeft: {
+        case A4CornerTypeBottomLeft: {
             return self.bottomLeftView.point;
         }
-        case LHGOpenCVCornerTypeBottomRight: {
+        case A4CornerTypeBottomRight: {
             return self.bottomRightView.point;
         }
-        case LHGOpenCVCornerTypeTopCenter: {
+        case A4CornerTypeTopCenter: {
             return self.topCenterView.point;
         }
-        case LHGOpenCVCornerTypeBottomCenter: {
+        case A4CornerTypeBottomCenter: {
             return self.bottomCenterView.point;
         }
-        case LHGOpenCVCornerTypeLeftCenter: {
+        case A4CornerTypeLeftCenter: {
             return self.leftCenterView.point;
         }
-        case LHGOpenCVCornerTypeRightCenter: {
+        case A4CornerTypeRightCenter: {
             return self.rightCenterView.point;
         }
         default: {
@@ -310,65 +310,65 @@
     }
 }
 
-- (LHGOpenCVCornerType)point:(CGPoint)point {
+- (A4CornerType)point:(CGPoint)point {
 //    CGRect pointRect = CGRectMake(point.x, point.y, 1, 1); // 创建一个非常小的矩形
     CGRect pointRect = CGRectMake(point.x - 20, point.y - 20, 40, 40); // 创建一个大的矩形
 
     if (CGRectContainsRect(self.topLeftView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeTopLeft;
+        return A4CornerTypeTopLeft;
     } else if (CGRectContainsRect(self.topRightView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeTopRight;
+        return A4CornerTypeTopRight;
     } else if (CGRectContainsRect(self.bottomLeftView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeBottomLeft;
+        return A4CornerTypeBottomLeft;
     } else if (CGRectContainsRect(self.bottomRightView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeBottomRight;
+        return A4CornerTypeBottomRight;
     } else if (CGRectContainsRect(self.topCenterView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeTopCenter;
+        return A4CornerTypeTopCenter;
     } else if (CGRectContainsRect(self.bottomCenterView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeBottomCenter;
+        return A4CornerTypeBottomCenter;
     } else if (CGRectContainsRect(self.leftCenterView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeLeftCenter;
+        return A4CornerTypeLeftCenter;
     } else if (CGRectContainsRect(self.rightCenterView.frame, pointRect)) {
-        return LHGOpenCVCornerTypeRightCenter;
+        return A4CornerTypeRightCenter;
     } else {
-        return LHGOpenCVCornerTypeOther;
+        return A4CornerTypeOther;
     }
 }
 
 //移动center点位置
-- (void)updateCenterPointType:(LHGOpenCVCornerType)cornerType {
+- (void)updateCenterPointType:(A4CornerType)cornerType {
     switch (cornerType) {
-        case LHGOpenCVCornerTypeTopLeft: {
+        case A4CornerTypeTopLeft: {
             self.leftCenterView.point = CGPointMake((self.topLeftView.point.x + self.bottomLeftView.point.x) / 2, (self.topLeftView.point.y + self.bottomLeftView.point.y) / 2);
             self.topCenterView.point = CGPointMake((self.topLeftView.point.x + self.topRightView.point.x) / 2, (self.topLeftView.point.y + self.topRightView.point.y) / 2);
             [self setNeedsDisplay];
         }
-        case LHGOpenCVCornerTypeTopRight: {
+        case A4CornerTypeTopRight: {
             self.topCenterView.point = CGPointMake((self.topLeftView.point.x + self.topRightView.point.x) / 2, (self.topLeftView.point.y + self.topRightView.point.y) / 2);
             self.rightCenterView.point = CGPointMake((self.topRightView.point.x + self.bottomRightView.point.x) / 2, (self.topRightView.point.y + self.bottomRightView.point.y) / 2);
             [self setNeedsDisplay];
         }
-        case LHGOpenCVCornerTypeBottomLeft: {
+        case A4CornerTypeBottomLeft: {
             self.leftCenterView.point = CGPointMake((self.topLeftView.point.x + self.bottomLeftView.point.x) / 2, (self.topLeftView.point.y + self.bottomLeftView.point.y) / 2);
             self.bottomCenterView.point = CGPointMake((self.bottomLeftView.point.x + self.bottomRightView.point.x) / 2, (self.bottomLeftView.point.y + self.bottomRightView.point.y) / 2);
             [self setNeedsDisplay];
         }
-        case LHGOpenCVCornerTypeBottomRight: {
+        case A4CornerTypeBottomRight: {
             self.rightCenterView.point = CGPointMake((self.topRightView.point.x + self.bottomRightView.point.x) / 2, (self.topRightView.point.y + self.bottomRightView.point.y) / 2);
             self.bottomCenterView.point = CGPointMake((self.bottomLeftView.point.x + self.bottomRightView.point.x) / 2, (self.bottomLeftView.point.y + self.bottomRightView.point.y) / 2);
             [self setNeedsDisplay];
         }
             //todo
-//        case LHGOpenCVCornerTypeTopCenter: {
+//        case A4CornerTypeTopCenter: {
 //            
 //        }
-//        case LHGOpenCVCornerTypeBottomCenter: {
+//        case A4CornerTypeBottomCenter: {
 //            
 //        }
-//        case LHGOpenCVCornerTypeLeftCenter: {
+//        case A4CornerTypeLeftCenter: {
 //            
 //        }
-//        case LHGOpenCVCornerTypeRightCenter: {
+//        case A4CornerTypeRightCenter: {
 //            
 //        }
         default: {
@@ -382,14 +382,14 @@
     CGFloat scale = [imageView shm_contentScale];
     CGSize targetSize = CGSizeMake(imageView.image.size.width, imageView.image.size.height);
 
-    CGPoint topLeftPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeTopLeft];
-    CGPoint topRightPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeTopRight];
-    CGPoint bottomLeftPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeBottomLeft];
-    CGPoint bottomRightPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeBottomRight];
-    CGPoint topCenterPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeTopCenter];
-    CGPoint bottomCenterPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeBottomCenter];
-    CGPoint leftCenterPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeLeftCenter];
-    CGPoint rightCenterPoint = [self pointValueWithCornerType:LHGOpenCVCornerTypeRightCenter];
+    CGPoint topLeftPoint = [self pointValueWithCornerType:A4CornerTypeTopLeft];
+    CGPoint topRightPoint = [self pointValueWithCornerType:A4CornerTypeTopRight];
+    CGPoint bottomLeftPoint = [self pointValueWithCornerType:A4CornerTypeBottomLeft];
+    CGPoint bottomRightPoint = [self pointValueWithCornerType:A4CornerTypeBottomRight];
+    CGPoint topCenterPoint = [self pointValueWithCornerType:A4CornerTypeTopCenter];
+    CGPoint bottomCenterPoint = [self pointValueWithCornerType:A4CornerTypeBottomCenter];
+    CGPoint leftCenterPoint = [self pointValueWithCornerType:A4CornerTypeLeftCenter];
+    CGPoint rightCenterPoint = [self pointValueWithCornerType:A4CornerTypeRightCenter];
 
     topLeftPoint.x /= scale;
     topLeftPoint.y /= scale;
@@ -457,72 +457,72 @@
 
 #pragma mark - Getters
 
-- (LHGOpenCVCropCornerView *)topLeftView {
+- (A4CropCornerView *)topLeftView {
     if (!_topLeftView) {
         _topLeftView = [self cornerView];
-        _topLeftView.cornerType = LHGOpenCVCornerTypeTopLeft;
+        _topLeftView.cornerType = A4CornerTypeTopLeft;
     }
     return _topLeftView;
 }
 
-- (LHGOpenCVCropCornerView *)topRightView {
+- (A4CropCornerView *)topRightView {
     if (!_topRightView) {
         _topRightView = [self cornerView];
-        _topRightView.cornerType = LHGOpenCVCornerTypeTopRight;
+        _topRightView.cornerType = A4CornerTypeTopRight;
     }
     return _topRightView;
 }
 
-- (LHGOpenCVCropCornerView *)bottomLeftView {
+- (A4CropCornerView *)bottomLeftView {
     if (!_bottomLeftView) {
         _bottomLeftView = [self cornerView];
-        _bottomLeftView.cornerType = LHGOpenCVCornerTypeBottomLeft;
+        _bottomLeftView.cornerType = A4CornerTypeBottomLeft;
     }
     return _bottomLeftView;
 }
 
-- (LHGOpenCVCropCornerView *)bottomRightView {
+- (A4CropCornerView *)bottomRightView {
     if (!_bottomRightView) {
         _bottomRightView = [self cornerView];
-        _bottomRightView.cornerType = LHGOpenCVCornerTypeBottomRight;
+        _bottomRightView.cornerType = A4CornerTypeBottomRight;
     }
     return _bottomRightView;
 }
 
-- (LHGOpenCVCropCornerView *)topCenterView {
+- (A4CropCornerView *)topCenterView {
     if (!_topCenterView) {
         _topCenterView = [self cornerView];
-        _topCenterView.cornerType = LHGOpenCVCornerTypeTopCenter;
+        _topCenterView.cornerType = A4CornerTypeTopCenter;
     }
     return _topCenterView;
 }
 
-- (LHGOpenCVCropCornerView *)bottomCenterView {
+- (A4CropCornerView *)bottomCenterView {
     if (!_bottomCenterView) {
         _bottomCenterView = [self cornerView];
-        _bottomCenterView.cornerType = LHGOpenCVCornerTypeBottomCenter;
+        _bottomCenterView.cornerType = A4CornerTypeBottomCenter;
     }
     return _bottomCenterView;
 }
 
-- (LHGOpenCVCropCornerView *)leftCenterView {
+- (A4CropCornerView *)leftCenterView {
     if (!_leftCenterView) {
         _leftCenterView = [self cornerView];
-        _leftCenterView.cornerType = LHGOpenCVCornerTypeLeftCenter;
+        _leftCenterView.cornerType = A4CornerTypeLeftCenter;
     }
     return _leftCenterView;
 }
 
-- (LHGOpenCVCropCornerView *)rightCenterView {
+- (A4CropCornerView *)rightCenterView {
     if (!_rightCenterView) {
         _rightCenterView = [self cornerView];
-        _rightCenterView.cornerType = LHGOpenCVCornerTypeRightCenter;
+        _rightCenterView.cornerType = A4CornerTypeRightCenter;
     }
     return _rightCenterView;
 }
 
-- (LHGOpenCVCropCornerView *)cornerView {
-    LHGOpenCVCropCornerView *cornerView = [[LHGOpenCVCropCornerView alloc] init];
+- (A4CropCornerView *)cornerView {
+    A4CropCornerView *cornerView = [[A4CropCornerView alloc] init];
     cornerView.frame = CGRectMake(0, 0, kCropButtonSize, kCropButtonSize);
     cornerView.layer.backgroundColor = self.cornerFillColor.CGColor;
     cornerView.layer.cornerRadius = kCropButtonSize/2;

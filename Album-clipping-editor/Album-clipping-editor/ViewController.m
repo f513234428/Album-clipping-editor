@@ -6,7 +6,7 @@
 //
 
 #import "ViewController.h"
-#import "CameraTool/CameraViewController.h"
+#import "A4CameraViewController.h"
 #import <JSBadgeView.h>
 #import "TestViewController.h"
 
@@ -19,7 +19,7 @@
 #define kSquareColor [UIColor colorWithRed:0.004 green:0.349 blue:0.616 alpha:1]
 
 @interface ViewController ()<CameraDelegate>
-@property(nonatomic, strong) CameraViewController *cameraViewvController;
+@property(nonatomic, strong) A4CameraViewController *cameraViewvController;
 @property(nonatomic, strong) JSBadgeView *badgeView;
 @property(nonatomic, assign) int tag;
 @end
@@ -80,7 +80,7 @@
 
 - (void)cameraAction
 {
-    self.cameraViewvController = [[CameraViewController alloc] init];
+    self.cameraViewvController = [[A4CameraViewController alloc] init];
     self.cameraViewvController.delegate = self;
 //    self.cameraViewvController.modalPresentationStyle = 0;
     UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:self.cameraViewvController];

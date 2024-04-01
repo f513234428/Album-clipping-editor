@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVCropFrameView.h
+//  A4CropFrameView.h
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
@@ -7,22 +7,22 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LHGOpenCVDefines.h"
+#import "A4Defines.h"
 
-@class LHGOpenCVCropFrameView;
+@class A4CropFrameView;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@protocol LHGOpenCVCropFrameViewDelegate <NSObject>
+@protocol A4CropFrameViewDelegate <NSObject>
 
 @optional
-- (void)cropFrameView:(LHGOpenCVCropFrameView *)cropFrameView didMoveToPoint:(CGPoint)point state:(UIGestureRecognizerState)state;
+- (void)cropFrameView:(A4CropFrameView *)cropFrameView didMoveToPoint:(CGPoint)point state:(UIGestureRecognizerState)state;
 
 @end
 
-@interface LHGOpenCVCropFrameView : UIView
+@interface A4CropFrameView : UIView
 
-@property (nonatomic, weak) id<LHGOpenCVCropFrameViewDelegate> delegate;
+@property (nonatomic, weak) id<A4CropFrameViewDelegate> delegate;
 
 @property (nonatomic, strong) UIColor *cornerFillColor;
 
@@ -35,12 +35,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithFrame:(CGRect)frame;
 
-- (void)updatePointValue:(CGPoint)point cornerType:(LHGOpenCVCornerType)cornerType;
+- (void)updatePointValue:(CGPoint)point cornerType:(A4CornerType)cornerType;
 - (void)reloadCropFrame:(CGRect)frame;
 - (void)paddingAllPoions;
 - (void)resetDefaultPoints:(CGFloat)offset;
-- (void)updateCenterPointType:(LHGOpenCVCornerType)cornerType ;
-- (CGPoint)pointValueWithCornerType:(LHGOpenCVCornerType)cornerType;
+- (void)updateCenterPointType:(A4CornerType)cornerType ;
+- (CGPoint)pointValueWithCornerType:(A4CornerType)cornerType;
 - (UIImage *)exportEditPhoto:(UIImageView *)imageView;
 @property(nonatomic, assign) bool isFullTag;
 @end

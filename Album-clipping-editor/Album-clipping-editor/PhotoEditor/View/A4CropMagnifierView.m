@@ -1,23 +1,23 @@
 //
-//  LHGOpenCVCropMagnifierView.m
+//  A4CropMagnifierView.m
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/5.
 //  Copyright © 2020 lihuaguang. All rights reserved.
 //
 
-#import "LHGOpenCVCropMagnifierView.h"
+#import "A4CropMagnifierView.h"
 
 static CGFloat kCropMagnifierSize = 100.0f;
 
-@interface LHGOpenCVCropMagnifierView ()
+@interface A4CropMagnifierView ()
 
 @property (nonatomic, assign) CGPoint renderPoint;
 @property (nonatomic, strong) UIView *renderView;
 
 @end
 
-@implementation LHGOpenCVCropMagnifierView
+@implementation A4CropMagnifierView
 
 - (instancetype)init {
     return [self initWithFrame:CGRectMake(0, 0, kCropMagnifierSize, kCropMagnifierSize)];

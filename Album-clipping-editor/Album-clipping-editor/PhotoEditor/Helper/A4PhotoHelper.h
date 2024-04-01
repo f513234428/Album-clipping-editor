@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVPhotoHelper.h
+//  A4PhotoHelper.h
 //  Album-clipping-editor
 //
 //  Created by syz on 2024/4/1.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LHGOpenCVPhotoHelper : NSObject
+@interface A4PhotoHelper : NSObject
 + (instancetype)sharedHelper;
 - (void)removePhotoArrIndex:(NSInteger)index ;
 - (NSMutableArray *)getEditPhotoArr ;

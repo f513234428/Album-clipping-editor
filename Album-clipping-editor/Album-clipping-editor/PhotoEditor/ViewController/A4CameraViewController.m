@@ -6,18 +6,18 @@
 //  Copyright © 2017年 wzh. All rights reserved.
 //
 
-#import "CameraViewController.h"
+#import "A4CameraViewController.h"
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import <Photos/Photos.h>
 #import <HXPhotoPicker.h>
 #import "ReLayoutButton.h"
 #import <JSBadgeView.h>
-#import "AlbumPictureArrView.h"
+#import "A4AlbumPhotoArrView.h"
 #import <Masonry.h>
-#import "LHGOpenCVToolController.h"
+#import "A4EditorBaseController.h"
 
-@interface CameraViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,HXPhotoViewDelegate>
+@interface A4CameraViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,HXPhotoViewDelegate>
 @property (nonatomic, strong) AVCaptureConnection *stillImageConnection;
 
 @property (nonatomic, strong) NSData  *jpegData;
@@ -34,17 +34,19 @@
 @property(nonatomic, assign) BOOL original;
 @property(nonatomic, strong) NSMutableArray *selectList;
 @property(nonatomic, strong) HXPhotoManager *photoManager;
-@property(nonatomic, strong) AlbumPictureArrView *photoBtn;
+@property(nonatomic, strong) A4AlbumPhotoArrView *photoBtn;
 @property(nonatomic, strong) ReLayoutButton *withdrawBtn;
 @property(nonatomic, strong) JSBadgeView *badgeView;
 @property(nonatomic, assign) BOOL isTakePicture;
-@property(nonatomic, strong) AlbumPictureArrView *photoArrBtnView;
+@property(nonatomic, strong) A4AlbumPhotoArrView *photoArrBtnView;
 @end
 
-@implementation CameraViewController
+@implementation A4CameraViewController
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+//    [self.stillImageOutput capturePhotoWithSettings:self.outputSettings delegate:self];
+
     self.selectList = [[NSMutableArray alloc] init];
     [self getPhotoLibraryAuthorization];
     [self createQueue];
@@ -77,7 +79,6 @@
     [headerView addSubview:headerBtn];
     [self.navigationController.navigationBar.subviews.lastObject setHidden:YES];
     [headerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(headerView);
         make.bottom.mas_equalTo(headerView).mas_offset(-15);
         make.left.mas_equalTo(headerView).mas_offset(20);
         make.width.height.mas_equalTo(40);
@@ -90,7 +91,6 @@
     [headerView addSubview:lampBtn];
     [self.navigationController.navigationBar.subviews.lastObject setHidden:YES];
     [lampBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.centerY.mas_equalTo(headerView);
         make.bottom.mas_equalTo(headerView).mas_offset(-15);
         make.right.mas_equalTo(headerView).mas_offset(-20);
         make.width.height.mas_equalTo(40);
@@ -113,7 +113,7 @@
         make.width.height.mas_equalTo(72);
     }];
     
-    self.photoBtn = [[AlbumPictureArrView alloc] init];
+    self.photoBtn = [[A4AlbumPhotoArrView alloc] init];
     self.photoBtn.photoLabel.text = @"Local Upload";
     [self.photoBtn.photoView setImage:[UIImage imageNamed:@"cameraPhoto"] ];
     [self.photoBtn setPhotoStyle];
@@ -214,8 +214,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 
                 // 使用这张图片
-//                UIImage *compressionImg = [CameraViewController compressImage:image toTargetWidth:200];
-                UIImage *compressionImg = [CameraViewController reSizeImageData:image maxImageSize:150 maxSizeWithKB:50];
+//                UIImage *compressionImg = [A4CameraViewController compressImage:image toTargetWidth:200];
+                UIImage *compressionImg = [A4CameraViewController reSizeImageData:image maxImageSize:150 maxSizeWithKB:50];
 //                UIImage *compressionImg = [image hx_scaleToFitSize:CGSizeMake(50, 50)];
                 [self.photoBtn.photoView setImage: compressionImg];
 
@@ -226,7 +226,7 @@
 
 //照相
 - (void)takePhotoButtonClick {
-    _stillImageConnection = [self.stillImageOutput        connectionWithMediaType:AVMediaTypeVideo];
+    _stillImageConnection = [self.stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     UIDeviceOrientation curDeviceOrientation = [[UIDevice currentDevice] orientation];
     AVCaptureVideoOrientation avcaptureOrientation = [self avOrientationForDeviceOrientation:curDeviceOrientation];
     [_stillImageConnection setVideoOrientation:avcaptureOrientation];
@@ -272,7 +272,7 @@
 
 - (void)getPhotoArrLast {
     HXPhotoModel *model = self.selectList.lastObject;
-    UIImage *compressionImg = [CameraViewController reSizeImageData:model.previewPhoto maxImageSize:150 maxSizeWithKB:50];
+    UIImage *compressionImg = [A4CameraViewController reSizeImageData:model.previewPhoto maxImageSize:150 maxSizeWithKB:50];
     [self.photoArrBtnView.photoView setImage:compressionImg];
 
     self.badgeView.badgeText = [NSString stringWithFormat:@"%lu",(unsigned long)self.selectList.count];
@@ -281,7 +281,7 @@
 
 //拍照之后调到相片详情页面
 -(void)jumpPictureReaderView{
-    LHGOpenCVToolController *vc = [[LHGOpenCVToolController alloc] init];
+    A4EditorBaseController *vc = [[A4EditorBaseController alloc] init];
     vc.originImageArr = _selectList;
     NSLog(@"跳转相片详情页面");
     [self.navigationController pushViewController:vc animated:YES];
@@ -325,7 +325,7 @@
     //        [photoList hx_requestImageWithOriginal:NO completion:^(NSArray<UIImage *> * _Nullable imageArray, NSArray<HXPhotoModel *> * _Nullable errorArray) {
     //            NSSLog(@"images - %@", imageArray);
     //        }];
-            LHGOpenCVToolController *vc = [[LHGOpenCVToolController alloc] init];
+            A4EditorBaseController *vc = [[A4EditorBaseController alloc] init];
             vc.originImageArr = [NSMutableArray arrayWithArray:photoList];
             NSLog(@"跳转相片详情页面");
             [self.navigationController pushViewController:vc animated:YES];
@@ -351,12 +351,12 @@
     NSSLog(@"%@,%lu",allList,(unsigned long)allList.count);
 }
 
-//#pragma mark - LHGOpenCVEditingViewControllerDelegate
+//#pragma mark - A4EditingViewControllerDelegate
 //
-//- (void)editingController:(LHGOpenCVEditingViewController *)editor didFinishCropping:(UIImage *)finalCropImage {
+//- (void)editingController:(A4EditingViewController *)editor didFinishCropping:(UIImage *)finalCropImage {
 //    UIImageView *imageView = (UIImageView *)[self.view viewWithTag:500];
 //    imageView.image = finalCropImage;
-//    NSSLog(@"LHGOpenCV回调--%@",imageView);
+//    NSSLog(@"A4回调--%@",imageView);
 //
 //}
 
@@ -384,9 +384,9 @@
     }
     return _badgeView;
 }
-- (AlbumPictureArrView *)photoArrBtnView {
+- (A4AlbumPhotoArrView *)photoArrBtnView {
     if (!_photoArrBtnView) {
-        _photoArrBtnView = [[AlbumPictureArrView alloc] init];
+        _photoArrBtnView = [[A4AlbumPhotoArrView alloc] init];
     }
     return _photoArrBtnView;
 }

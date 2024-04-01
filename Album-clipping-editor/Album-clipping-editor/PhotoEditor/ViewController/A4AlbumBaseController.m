@@ -1,13 +1,13 @@
 //
-//  AlbumBaseController.m
+//  A4AlbumBaseController.m
 //  Album-clipping-editor
 //
 //  Created by syz on 2024/3/25.
 //
 
-#import "AlbumBaseController.h"
+#import "A4AlbumBaseController.h"
 
-@interface AlbumBaseController ()
+@interface A4AlbumBaseController ()
 /**
  *  预览图层
  */
@@ -22,9 +22,10 @@
  */
 @property(nonatomic,assign)CGFloat effectiveScale;
 
+
 @end
 
-@implementation AlbumBaseController
+@implementation A4AlbumBaseController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,9 +54,11 @@
     }
     self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
     //输出设置。AVVideoCodecJPEG   输出jpeg格式图片
-    NSDictionary * outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecJPEG,AVVideoCodecKey, nil];
-    [self.stillImageOutput setOutputSettings:outputSettings];
-    
+    NSDictionary * setDic = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecTypeJPEG,AVVideoCodecKey, nil];
+    [self.stillImageOutput setOutputSettings:setDic];
+//    _outputSettings = [AVCapturePhotoSettings photoSettingsWithFormat:setDic];
+//    [self.stillImageOutput setPhotoSettingsForSceneMonitoring:_outputSettings];
+
     if ([self.session canAddInput:self.videoInput]) {
         [self.session addInput:self.videoInput];
     }

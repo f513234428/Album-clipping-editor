@@ -1,17 +1,17 @@
 //
-//  LHGOpenCVToolController.m
+//  A4EditorBaseController.m
 //  Album-clipping-editor
 //
 //  Created by syz on 2024/3/29.
 //
 
-#import "LHGOpenCVToolController.h"
-#import "LHGOpenCVEditingViewController.h"
+#import "A4EditorBaseController.h"
+#import "A4EditingViewController.h"
 #import <HXPhotoPicker.h>
 #import <Masonry.h>
-#import "LHGOpenCVPhotoHelper.h"
+#import "A4PhotoHelper.h"
 
-@interface LHGOpenCVToolController ()<UIScrollViewDelegate>
+@interface A4EditorBaseController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, assign) NSUInteger currentIndex;
 @property (nonatomic, strong) UIImage *originImage;
@@ -24,7 +24,7 @@
 @property(nonatomic, strong) NSMutableArray *editClipArry;//编辑过的图片数组
 @end
 
-@implementation LHGOpenCVToolController
+@implementation A4EditorBaseController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -125,7 +125,7 @@
     CGFloat scrollViewWidth = self.scrollView.frame.size.width;
     for (int i = 0; i < numberOfViewControllers; i++) {
         // 创建新的ViewController
-        LHGOpenCVEditingViewController *contentViewController = [[LHGOpenCVEditingViewController alloc] init];
+        A4EditingViewController *contentViewController = [[A4EditingViewController alloc] init];
         HXPhotoModel *model = self.originImageArr[i];
         contentViewController.originPhoto = model;
         contentViewController.imageTag = i;
@@ -147,7 +147,7 @@
 
 - (void)previousButtonTapped {
     if (self.currentIndex > 0 && self.isCanTouch) {
-        [[LHGOpenCVPhotoHelper sharedHelper] removePhotoArrIndex:self.currentIndex];
+        [[A4PhotoHelper sharedHelper] removePhotoArrIndex:self.currentIndex];
         CGPoint contentOffset = self.scrollView.contentOffset;
         contentOffset.x -= self.view.frame.size.width;
         [self.scrollView setContentOffset:contentOffset animated:YES];
@@ -166,7 +166,7 @@
 
 - (void)nextButtonTapped {
     NSLog(@"当前第%lu张",(unsigned long)(self.currentIndex + 1));
-    if (![[LHGOpenCVPhotoHelper sharedHelper] isCanSavePhoto]) {
+    if (![[A4PhotoHelper sharedHelper] isCanSavePhoto]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"所选区域无效" message:nil preferredStyle:UIAlertControllerStyleAlert];
         [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
         [self presentViewController:alert animated:YES completion:nil];
@@ -190,7 +190,7 @@
         });
     } else if (self.currentIndex == self.originImageArr.count - 1) {
         NSLog(@"所有完成");
-        NSMutableArray *editPhotoArr = [[LHGOpenCVPhotoHelper sharedHelper] getEditPhotoArr];
+        NSMutableArray *editPhotoArr = [[A4PhotoHelper sharedHelper] getEditPhotoArr];
     }
 }
 

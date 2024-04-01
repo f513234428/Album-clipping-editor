@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVHelper.h
+//  A4Helper.h
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LHGOpenCVHelper : NSObject
+@interface A4Helper : NSObject
 
 /**
  轮廓提取，并查找轮廓四个顶点

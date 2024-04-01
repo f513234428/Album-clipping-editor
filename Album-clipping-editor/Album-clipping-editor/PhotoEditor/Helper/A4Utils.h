@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVUtils.h
+//  A4Utils.h
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LHGOpenCVUtils : NSObject
+@interface A4Utils : NSObject
 
 /**
  二值化

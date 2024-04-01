@@ -1,20 +1,20 @@
 //
-//  AlbumPictureArrView.m
+//  A4AlbumPhotoArrView.m
 //  Album-clipping-editor
 //
 //  Created by syz on 2024/3/26.
 //
 
-#import "AlbumPictureArrView.h"
+#import "A4AlbumPhotoArrView.h"
 #import <Masonry.h>
 
-@interface AlbumPictureArrView ()
+@interface A4AlbumPhotoArrView ()
 @property(nonatomic, strong) UIView *labelBGView;
 @property(nonatomic, strong) NSMutableDictionary *blockActionDict;
 
 @end
 
-@implementation AlbumPictureArrView
+@implementation A4AlbumPhotoArrView
 
 -(instancetype)init{
     if (self = [super initWithFrame:CGRectZero]) {

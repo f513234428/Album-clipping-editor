@@ -1,14 +1,14 @@
 //
-//  LHGOpenCVCropCornerView.m
+//  A4CropCornerView.m
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
 //  Copyright © 2020 lihuaguang. All rights reserved.
 //
 
-#import "LHGOpenCVCropCornerView.h"
+#import "A4CropCornerView.h"
 
-@implementation LHGOpenCVCropCornerView
+@implementation A4CropCornerView
 
 - (void)setPoint:(CGPoint)point {
     self.center = point;

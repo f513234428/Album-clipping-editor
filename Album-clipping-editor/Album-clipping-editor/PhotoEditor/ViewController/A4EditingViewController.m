@@ -1,29 +1,29 @@
 //
-//  LHGOpenCVEditingViewController.m
+//  A4EditingViewController.m
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
 //  Copyright © 2020 lihuaguang. All rights reserved.
 //
 
-#import "LHGOpenCVEditingViewController.h"
+#import "A4EditingViewController.h"
 #import "UIImageView+LHGContentRect.h"
-#import "LHGOpenCVCropFrameView.h"
-#import "LHGOpenCVCropMagnifierView.h"
-#import "LHGOpenCVUtils.h"
-#import "LHGOpenCVHelper.h"
+#import "A4CropFrameView.h"
+#import "A4CropMagnifierView.h"
+#import "A4Utils.h"
+#import "A4Helper.h"
 #import "Masonry.h"
 #import <HXPhotoPicker.h>
 #import "ShowPictureController.h"
-#import "LHGOpenCVPhotoHelper.h"
+#import "A4PhotoHelper.h"
 
-static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
+static CGFloat kA4EditingImageMargin = 20.0;
 
-@interface LHGOpenCVEditingViewController () <LHGOpenCVCropFrameViewDelegate>
+@interface A4EditingViewController () <A4CropFrameViewDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
-@property (nonatomic, strong) LHGOpenCVCropFrameView *cropFrameView;
-@property (strong, nonatomic) LHGOpenCVCropMagnifierView *magnifierView;//放大镜
+@property (nonatomic, strong) A4CropFrameView *cropFrameView;
+@property (strong, nonatomic) A4CropMagnifierView *magnifierView;//放大镜
 @property (assign, nonatomic) CGFloat imageWidth;
 @property (assign, nonatomic) CGFloat imageHeight;
 @property(nonatomic, strong) UIView * drawingBoardView;
@@ -31,7 +31,7 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
 //@property(nonatomic, strong) UIScrollView *editView;
 @end
 
-@implementation LHGOpenCVEditingViewController
+@implementation A4EditingViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,10 +46,10 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
     [self.view addSubview:self.drawingBoardView];
     self.drawingBoardView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - BOTTOM_HEIGHT - 108 - STATUS_HEIGHT);
     CGRect imageFrame = CGRectZero;
-    imageFrame.origin.x = kLHGOpenCVEditingImageMargin;
-    imageFrame.origin.y = kLHGOpenCVEditingImageMargin;
-    imageFrame.size.width = CGRectGetWidth(self.drawingBoardView.frame) - kLHGOpenCVEditingImageMargin * 2;
-    imageFrame.size.height = CGRectGetHeight(self.drawingBoardView.frame) - imageFrame.origin.y - kLHGOpenCVEditingImageMargin;
+    imageFrame.origin.x = kA4EditingImageMargin;
+    imageFrame.origin.y = kA4EditingImageMargin;
+    imageFrame.size.width = CGRectGetWidth(self.drawingBoardView.frame) - kA4EditingImageMargin * 2;
+    imageFrame.size.height = CGRectGetHeight(self.drawingBoardView.frame) - imageFrame.origin.y - kA4EditingImageMargin;
     
     
     self.imageView = [[UIImageView alloc] initWithFrame:imageFrame];
@@ -60,11 +60,11 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
     CGRect cropFrame = [self.imageView shm_contentFrame];
     cropFrame.origin.x += imageFrame.origin.x;
     cropFrame.origin.y += imageFrame.origin.y;
-    self.cropFrameView = [[LHGOpenCVCropFrameView alloc] initWithFrame:cropFrame];
+    self.cropFrameView = [[A4CropFrameView alloc] initWithFrame:cropFrame];
     self.cropFrameView.delegate = self;
     [self.drawingBoardView addSubview:self.cropFrameView];
     
-    self.magnifierView = [[LHGOpenCVCropMagnifierView alloc] init];
+    self.magnifierView = [[A4CropMagnifierView alloc] init];
     [self.view addSubview:self.magnifierView];
     self.magnifierView.hidden = YES;
     
@@ -93,7 +93,7 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
     NSDictionary *userInfo = notification.userInfo;
     int tag = [[userInfo objectForKey:@"imageTag"] intValue];
     if (tag == self.imageTag) {
-        [[LHGOpenCVPhotoHelper sharedHelper] savePhoto:self.originPhoto];
+        [[A4PhotoHelper sharedHelper] savePhoto:self.originPhoto];
     }
 }
 - (void)bottomViewDidRotate:(NSNotification *)notification {
@@ -123,7 +123,7 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
 - (void)openAutoDector {
     if (self.autoDectorCorner) {
         //轮廓提取，并查找轮廓四个顶点
-        [LHGOpenCVHelper asyncDetectQuadCornersWithImage:self.originPhoto.previewPhoto targetSize:self.cropFrameView.frame.size completionHandler:^(NSDictionary<NSNumber *,NSValue *> * _Nullable quadPoints) {
+        [A4Helper asyncDetectQuadCornersWithImage:self.originPhoto.previewPhoto targetSize:self.cropFrameView.frame.size completionHandler:^(NSDictionary<NSNumber *,NSValue *> * _Nullable quadPoints) {
             // 创建一个 dispatch_group 异步block结果返回后同步刷新UI
             dispatch_group_t group = dispatch_group_create();
             if (quadPoints.count == 4) {
@@ -137,8 +137,8 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
                 }];
                 // 在所有操作完成后执行外部的方法
                 dispatch_group_notify(group, dispatch_get_main_queue(), ^{
-                    [self.cropFrameView updateCenterPointType:LHGOpenCVCornerTypeTopLeft];
-                    [self.cropFrameView updateCenterPointType:LHGOpenCVCornerTypeBottomRight];
+                    [self.cropFrameView updateCenterPointType:A4CornerTypeTopLeft];
+                    [self.cropFrameView updateCenterPointType:A4CornerTypeBottomRight];
                 });
             }
         }];
@@ -193,9 +193,9 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
-#pragma mark - LHGOpenCVCropFrameViewDelegate
+#pragma mark - A4CropFrameViewDelegate
 
-- (void)cropFrameView:(LHGOpenCVCropFrameView *)cropFrameView didMoveToPoint:(CGPoint)point state:(UIGestureRecognizerState)state {
+- (void)cropFrameView:(A4CropFrameView *)cropFrameView didMoveToPoint:(CGPoint)point state:(UIGestureRecognizerState)state {
     if (state == UIGestureRecognizerStateBegan) {
         self.magnifierView.hidden = NO;
     } else if (state == UIGestureRecognizerStateEnded || state == UIGestureRecognizerStateCancelled) {
@@ -208,7 +208,7 @@ static CGFloat kLHGOpenCVEditingImageMargin = 20.0;
     magnifierCenter.y -= self.magnifierView.frame.size.height;
     self.magnifierView.center = magnifierCenter;
     
-    [[LHGOpenCVPhotoHelper sharedHelper] setCurrentPhotoCanSave:[self.cropFrameView isQuadEffective]];
+    [[A4PhotoHelper sharedHelper] setCurrentPhotoCanSave:[self.cropFrameView isQuadEffective]];
 }
 
 

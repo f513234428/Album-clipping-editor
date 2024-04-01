@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVCropMagnifierView.h
+//  A4CropMagnifierView.h
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/5.
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LHGOpenCVCropMagnifierView : UIView
+@interface A4CropMagnifierView : UIView
 
 - (void)updateRenderPoint:(CGPoint)renderPoint renderView:(UIView *)renderView;
 

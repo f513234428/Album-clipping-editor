@@ -1,22 +1,22 @@
 //
-//  LHGOpenCVPhotoHelper.m
+//  A4PhotoHelper.m
 //  Album-clipping-editor
 //
 //  Created by syz on 2024/4/1.
 //
 
-#import "LHGOpenCVPhotoHelper.h"
+#import "A4PhotoHelper.h"
 
-@interface LHGOpenCVPhotoHelper ()
+@interface A4PhotoHelper ()
 @property(nonatomic, strong) NSMutableArray *photoArr;
 @property(nonatomic, assign) bool canSavePhoto;
 @end
 
 
-@implementation LHGOpenCVPhotoHelper
+@implementation A4PhotoHelper
 + (instancetype)sharedHelper {
     static dispatch_once_t onceToken;
-    static LHGOpenCVPhotoHelper *sharedHelper = nil;
+    static A4PhotoHelper *sharedHelper = nil;
     dispatch_once(&onceToken, ^{
         sharedHelper = [[self alloc] init];
         sharedHelper.photoArr = [NSMutableArray array];

@@ -1,5 +1,5 @@
 //
-//  LHGOpenCVCropCornerView.h
+//  A4CropCornerView.h
 //  OpenCVDemo
 //
 //  Created by lihuaguang on 2020/8/4.
@@ -7,13 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LHGOpenCVDefines.h"
+#import "A4Defines.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface LHGOpenCVCropCornerView : UIView
+@interface A4CropCornerView : UIView
 
-@property (nonatomic, assign) LHGOpenCVCornerType cornerType;
+@property (nonatomic, assign) A4CornerType cornerType;
 
 @property (nonatomic, assign) CGPoint point;
 
