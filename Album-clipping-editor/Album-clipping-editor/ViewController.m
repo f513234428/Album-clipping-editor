@@ -8,6 +8,7 @@
 #import "ViewController.h"
 #import "CameraTool/CameraViewController.h"
 #import <JSBadgeView.h>
+#import "TestViewController.h"
 
 #define kNumBadges 100
 
@@ -35,32 +36,45 @@
     [testBtn addTarget:self action:@selector(cameraAction) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:testBtn];
     
-    UIButton *test2Btn = [[UIButton alloc] init];
-    test2Btn.frame = CGRectMake(self.view.frame.size.width/2 - 50, 400, 100, 100);
-    [test2Btn setTitle:@"索引增加" forState:UIControlStateNormal];
-    [test2Btn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
-    [test2Btn addTarget:self action:@selector(changeBadge) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:test2Btn];
+//    UIButton *test2Btn = [[UIButton alloc] init];
+//    test2Btn.frame = CGRectMake(self.view.frame.size.width/2 - 50, 400, 100, 100);
+//    [test2Btn setTitle:@"索引增加" forState:UIControlStateNormal];
+//    [test2Btn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+//    [test2Btn addTarget:self action:@selector(changeBadge) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:test2Btn];
+//    
+//    UIButton *test4Btn = [[UIButton alloc] init];
+//    test4Btn.frame = CGRectMake(self.view.frame.size.width/2 - 50, 600, 100, 100);
+//    [test4Btn setTitle:@"测试跳转" forState:UIControlStateNormal];
+//    [test4Btn setTitleColor:[UIColor darkTextColor] forState:UIControlStateNormal];
+//    [test4Btn addTarget:self action:@selector(testChange) forControlEvents:UIControlEventTouchUpInside];
+//    [self.view addSubview:test4Btn];
 
     _tag = 1;
     
-    CGRect rectangleBounds = CGRectMake(0.0f,
-                                        0.0f,
-                                        kSquareSideLength,
-                                        kSquareSideLength);
-
-    
-    UIButton *test3Btn = [[UIButton alloc] init];
-    test3Btn.frame = CGRectIntegral(CGRectMake(100, 200, 100, 100));
-    test3Btn.backgroundColor = [UIColor yellowColor];
-    self.badgeView = [[JSBadgeView alloc] initWithParentView:test3Btn alignment:JSBadgeViewAlignmentTopRight];
-    self.badgeView.badgeText = [NSString stringWithFormat:@"%d",_tag];
-    [self.view addSubview:test3Btn];
+//    CGRect rectangleBounds = CGRectMake(0.0f,
+//                                        0.0f,
+//                                        kSquareSideLength,
+//                                        kSquareSideLength);
+//
+//    
+//    UIButton *test3Btn = [[UIButton alloc] init];
+//    test3Btn.frame = CGRectIntegral(CGRectMake(100, 200, 100, 100));
+//    test3Btn.backgroundColor = [UIColor yellowColor];
+//    self.badgeView = [[JSBadgeView alloc] initWithParentView:test3Btn alignment:JSBadgeViewAlignmentTopRight];
+//    self.badgeView.badgeText = [NSString stringWithFormat:@"%d",_tag];
+//    [self.view addSubview:test3Btn];
 }
 
 - (void)changeBadge {
     _tag ++;
     self.badgeView.badgeText = [NSString stringWithFormat:@"%d",_tag];
+
+}
+
+- (void)testChange {
+    TestViewController *vc = [[TestViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 
 }
 

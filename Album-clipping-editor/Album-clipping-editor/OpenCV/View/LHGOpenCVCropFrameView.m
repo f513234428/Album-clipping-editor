@@ -205,7 +205,6 @@
 - (void)singlePan:(UIPanGestureRecognizer *)gesture {
     CGPoint location = [gesture locationInView:self];
     if (gesture.state == UIGestureRecognizerStateEnded || gesture.state == UIGestureRecognizerStateCancelled) {
-//        self.activeCornerView.hidden = NO;
         self.activeCornerView = nil;
     }
     
@@ -243,11 +242,9 @@
         CGPoint covertPoint = [self convertPoint:location toView:cornerView];
         if (CGRectContainsPoint(cornerView.bounds, covertPoint)) {
             self.activeCornerView = cornerView;
-//            self.activeCornerView.hidden = YES;
             break;
         }
     }
-//    CVLogDebug(@"OpenCV Crop shouldReceiveTouch: %@, cornerView: %@", @(location), self.activeCornerView);
     return YES;
 }
 
@@ -314,7 +311,9 @@
 }
 
 - (LHGOpenCVCornerType)point:(CGPoint)point {
-    CGRect pointRect = CGRectMake(point.x, point.y, 1, 1); // 创建一个非常小的矩形
+//    CGRect pointRect = CGRectMake(point.x, point.y, 1, 1); // 创建一个非常小的矩形
+    CGRect pointRect = CGRectMake(point.x - 20, point.y - 20, 40, 40); // 创建一个大的矩形
+
     if (CGRectContainsRect(self.topLeftView.frame, pointRect)) {
         return LHGOpenCVCornerTypeTopLeft;
     } else if (CGRectContainsRect(self.topRightView.frame, pointRect)) {
@@ -411,7 +410,7 @@
     rightCenterPoint.y /= scale;
     // 创建一个图形上下文
     UIGraphicsBeginImageContextWithOptions(targetSize, NO, 0.0);
-    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextRef context = UIGraphicsGetCurrentContext();
     // 定义裁剪区域的路径
     UIBezierPath *clipPath = [UIBezierPath bezierPath];
     [clipPath moveToPoint:bottomLeftPoint];
@@ -525,7 +524,6 @@
 - (LHGOpenCVCropCornerView *)cornerView {
     LHGOpenCVCropCornerView *cornerView = [[LHGOpenCVCropCornerView alloc] init];
     cornerView.frame = CGRectMake(0, 0, kCropButtonSize, kCropButtonSize);
-//    cornerView.alpha = 0.5;
     cornerView.layer.backgroundColor = self.cornerFillColor.CGColor;
     cornerView.layer.cornerRadius = kCropButtonSize/2;
     cornerView.layer.borderWidth = 1.0;

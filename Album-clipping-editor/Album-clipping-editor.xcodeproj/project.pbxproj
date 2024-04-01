@@ -24,6 +24,9 @@
 		754C3C622BB168E600653926 /* ReLayoutButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 754C3C612BB168E600653926 /* ReLayoutButton.m */; };
 		7559E9102BB5706900F9C310 /* ShowPictureController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7559E90E2BB5706900F9C310 /* ShowPictureController.m */; };
 		7559E9112BB5706900F9C310 /* ShowPictureController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7559E90F2BB5706900F9C310 /* ShowPictureController.xib */; };
+		7559E9142BB6592E00F9C310 /* LHGOpenCVEditingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7559E9132BB6592E00F9C310 /* LHGOpenCVEditingModel.m */; };
+		7559E9172BB69D3900F9C310 /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7559E9162BB69D3900F9C310 /* TestViewController.m */; };
+		7559E91A2BB6A40F00F9C310 /* LHGOpenCVToolController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7559E9192BB6A40F00F9C310 /* LHGOpenCVToolController.m */; };
 		75A288702BB2E7C000CD3BA0 /* AlbumPictureArrView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A2886F2BB2E7C000CD3BA0 /* AlbumPictureArrView.m */; };
 		75A288852BB2EBBB00CD3BA0 /* LHGOpenCVCropFrameView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A288752BB2EBBB00CD3BA0 /* LHGOpenCVCropFrameView.m */; };
 		75A288862BB2EBBB00CD3BA0 /* LHGOpenCVCropCornerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A288792BB2EBBB00CD3BA0 /* LHGOpenCVCropCornerView.m */; };
@@ -32,6 +35,7 @@
 		75A288892BB2EBBB00CD3BA0 /* UIImageView+LHGContentRect.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A2887F2BB2EBBB00CD3BA0 /* UIImageView+LHGContentRect.m */; };
 		75A2888A2BB2EBBB00CD3BA0 /* LHGOpenCVUtils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75A288812BB2EBBB00CD3BA0 /* LHGOpenCVUtils.mm */; };
 		75A2888B2BB2EBBB00CD3BA0 /* LHGOpenCVHelper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75A288832BB2EBBB00CD3BA0 /* LHGOpenCVHelper.mm */; };
+		75A3764F2BBA40ED00BC10DD /* LHGOpenCVPhotoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A3764E2BBA40ED00BC10DD /* LHGOpenCVPhotoHelper.m */; };
 		E9B9ADE0DD0DF8575061158A /* Pods_Album_clipping_editor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0D2DA77DFDA107C14B74D70 /* Pods_Album_clipping_editor.framework */; };
 /* End PBXBuildFile section */
 
@@ -84,6 +88,12 @@
 		7559E90D2BB5706900F9C310 /* ShowPictureController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShowPictureController.h; sourceTree = "<group>"; };
 		7559E90E2BB5706900F9C310 /* ShowPictureController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ShowPictureController.m; sourceTree = "<group>"; };
 		7559E90F2BB5706900F9C310 /* ShowPictureController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShowPictureController.xib; sourceTree = "<group>"; };
+		7559E9122BB6592E00F9C310 /* LHGOpenCVEditingModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LHGOpenCVEditingModel.h; sourceTree = "<group>"; };
+		7559E9132BB6592E00F9C310 /* LHGOpenCVEditingModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHGOpenCVEditingModel.m; sourceTree = "<group>"; };
+		7559E9152BB69D3900F9C310 /* TestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
+		7559E9162BB69D3900F9C310 /* TestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		7559E9182BB6A40F00F9C310 /* LHGOpenCVToolController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LHGOpenCVToolController.h; sourceTree = "<group>"; };
+		7559E9192BB6A40F00F9C310 /* LHGOpenCVToolController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHGOpenCVToolController.m; sourceTree = "<group>"; };
 		75A2886E2BB2E7C000CD3BA0 /* AlbumPictureArrView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AlbumPictureArrView.h; sourceTree = "<group>"; };
 		75A2886F2BB2E7C000CD3BA0 /* AlbumPictureArrView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AlbumPictureArrView.m; sourceTree = "<group>"; };
 		75A288732BB2EBBB00CD3BA0 /* LHGOpenCVDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHGOpenCVDefines.h; sourceTree = "<group>"; };
@@ -101,6 +111,8 @@
 		75A288822BB2EBBB00CD3BA0 /* UIImageView+LHGContentRect.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LHGContentRect.h"; sourceTree = "<group>"; };
 		75A288832BB2EBBB00CD3BA0 /* LHGOpenCVHelper.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LHGOpenCVHelper.mm; sourceTree = "<group>"; };
 		75A288842BB2EBBB00CD3BA0 /* LHGOpenCVHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LHGOpenCVHelper.h; sourceTree = "<group>"; };
+		75A3764D2BBA40ED00BC10DD /* LHGOpenCVPhotoHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LHGOpenCVPhotoHelper.h; sourceTree = "<group>"; };
+		75A3764E2BBA40ED00BC10DD /* LHGOpenCVPhotoHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LHGOpenCVPhotoHelper.m; sourceTree = "<group>"; };
 		A262EA35574BA2FBD70D0ED2 /* Pods-Album-clipping-editor-Album-clipping-editorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Album-clipping-editor-Album-clipping-editorUITests.debug.xcconfig"; path = "Target Support Files/Pods-Album-clipping-editor-Album-clipping-editorUITests/Pods-Album-clipping-editor-Album-clipping-editorUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD9EB0670A055BAEE9F8037A /* Pods_Album_clipping_editor_Album_clipping_editorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Album_clipping_editor_Album_clipping_editorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB20F9C38B1F5450F2958164 /* Pods_Album_clipping_editorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Album_clipping_editorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -178,6 +190,8 @@
 				754C3BF32BB1095600653926 /* AppDelegate.m */,
 				754C3BF82BB1095600653926 /* ViewController.h */,
 				754C3BF92BB1095600653926 /* ViewController.m */,
+				7559E9152BB69D3900F9C310 /* TestViewController.h */,
+				7559E9162BB69D3900F9C310 /* TestViewController.m */,
 				754C3C5C2BB15DFA00653926 /* Header.h */,
 				754C3C602BB168E600653926 /* ReLayoutButton.h */,
 				754C3C612BB168E600653926 /* ReLayoutButton.m */,
@@ -264,6 +278,10 @@
 			children = (
 				75A2887D2BB2EBBB00CD3BA0 /* LHGOpenCVEditingViewController.h */,
 				75A2887C2BB2EBBB00CD3BA0 /* LHGOpenCVEditingViewController.m */,
+				7559E9182BB6A40F00F9C310 /* LHGOpenCVToolController.h */,
+				7559E9192BB6A40F00F9C310 /* LHGOpenCVToolController.m */,
+				7559E9122BB6592E00F9C310 /* LHGOpenCVEditingModel.h */,
+				7559E9132BB6592E00F9C310 /* LHGOpenCVEditingModel.m */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -277,6 +295,8 @@
 				75A288812BB2EBBB00CD3BA0 /* LHGOpenCVUtils.mm */,
 				75A288822BB2EBBB00CD3BA0 /* UIImageView+LHGContentRect.h */,
 				75A2887F2BB2EBBB00CD3BA0 /* UIImageView+LHGContentRect.m */,
+				75A3764D2BBA40ED00BC10DD /* LHGOpenCVPhotoHelper.h */,
+				75A3764E2BBA40ED00BC10DD /* LHGOpenCVPhotoHelper.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -531,21 +551,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				75A2888B2BB2EBBB00CD3BA0 /* LHGOpenCVHelper.mm in Sources */,
+				75A3764F2BBA40ED00BC10DD /* LHGOpenCVPhotoHelper.m in Sources */,
 				754C3C442BB10F3D00653926 /* CameraViewController.m in Sources */,
 				754C3BFA2BB1095600653926 /* ViewController.m in Sources */,
 				7559E9102BB5706900F9C310 /* ShowPictureController.m in Sources */,
 				754C3BF42BB1095600653926 /* AppDelegate.m in Sources */,
 				75A288852BB2EBBB00CD3BA0 /* LHGOpenCVCropFrameView.m in Sources */,
+				7559E9172BB69D3900F9C310 /* TestViewController.m in Sources */,
 				75A288892BB2EBBB00CD3BA0 /* UIImageView+LHGContentRect.m in Sources */,
 				754C3C592BB10F3D00653926 /* TKImageView.m in Sources */,
 				754C3C622BB168E600653926 /* ReLayoutButton.m in Sources */,
 				75A288882BB2EBBB00CD3BA0 /* LHGOpenCVEditingViewController.m in Sources */,
 				754C3C052BB1095700653926 /* main.m in Sources */,
 				7534ABEB2BB181F500F6EEBE /* AlbumBaseController.m in Sources */,
+				7559E9142BB6592E00F9C310 /* LHGOpenCVEditingModel.m in Sources */,
 				75A2888A2BB2EBBB00CD3BA0 /* LHGOpenCVUtils.mm in Sources */,
 				75A288702BB2E7C000CD3BA0 /* AlbumPictureArrView.m in Sources */,
 				75A288862BB2EBBB00CD3BA0 /* LHGOpenCVCropCornerView.m in Sources */,
 				75A288872BB2EBBB00CD3BA0 /* LHGOpenCVCropMagnifierView.m in Sources */,
+				7559E91A2BB6A40F00F9C310 /* LHGOpenCVToolController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -15,9 +15,9 @@
 #import <JSBadgeView.h>
 #import "AlbumPictureArrView.h"
 #import <Masonry.h>
-#import "LHGOpenCVEditingViewController.h"
+#import "LHGOpenCVToolController.h"
 
-@interface CameraViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,HXPhotoViewDelegate,LHGOpenCVEditingViewControllerDelegate>
+@interface CameraViewController ()<UIGestureRecognizerDelegate,UINavigationControllerDelegate,UIImagePickerControllerDelegate,HXPhotoViewDelegate>
 @property (nonatomic, strong) AVCaptureConnection *stillImageConnection;
 
 @property (nonatomic, strong) NSData  *jpegData;
@@ -272,7 +272,7 @@
 
 - (void)getPhotoArrLast {
     HXPhotoModel *model = self.selectList.lastObject;
-    UIImage *compressionImg = [CameraViewController reSizeImageData:model.previewPhoto maxImageSize:50 maxSizeWithKB:100];
+    UIImage *compressionImg = [CameraViewController reSizeImageData:model.previewPhoto maxImageSize:150 maxSizeWithKB:50];
     [self.photoArrBtnView.photoView setImage:compressionImg];
 
     self.badgeView.badgeText = [NSString stringWithFormat:@"%lu",(unsigned long)self.selectList.count];
@@ -281,10 +281,8 @@
 
 //拍照之后调到相片详情页面
 -(void)jumpPictureReaderView{
-    LHGOpenCVEditingViewController *vc = [[LHGOpenCVEditingViewController alloc] init];
-    vc.delegate = self;
-    HXPhotoModel *photoModel = self.selectList.lastObject;
-    vc.originImage = photoModel.previewPhoto;
+    LHGOpenCVToolController *vc = [[LHGOpenCVToolController alloc] init];
+    vc.originImageArr = _selectList;
     NSLog(@"跳转相片详情页面");
     [self.navigationController pushViewController:vc animated:YES];
     
@@ -317,7 +315,23 @@
 {
     @weakify(self);
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self hx_presentSelectPhotoControllerWithManager:self.photoManager delegate:self];
+//        [self hx_presentSelectPhotoControllerWithManager:self.photoManager delegate:self];
+        [self hx_presentSelectPhotoControllerWithManager:self.photoManager didDone:^(NSArray<HXPhotoModel *> *allList, NSArray<HXPhotoModel *> *photoList, NSArray<HXPhotoModel *> *videoList, BOOL isOriginal, UIViewController *viewController, HXPhotoManager *manager) {
+//            weakSelf.total.text = [NSString stringWithFormat:@"总数量：%ld   ( 照片：%ld   视频：%ld )",allList.count, photoList.count, videoList.count];
+//            weakSelf.original.text = isOriginal ? @"YES" : @"NO";
+//            NSSLog(@"block - all - %@",allList);
+            NSSLog(@"block - photo - %@",photoList);
+//            NSSLog(@"block - video - %@",videoList);
+    //        [photoList hx_requestImageWithOriginal:NO completion:^(NSArray<UIImage *> * _Nullable imageArray, NSArray<HXPhotoModel *> * _Nullable errorArray) {
+    //            NSSLog(@"images - %@", imageArray);
+    //        }];
+            LHGOpenCVToolController *vc = [[LHGOpenCVToolController alloc] init];
+            vc.originImageArr = [NSMutableArray arrayWithArray:photoList];
+            NSLog(@"跳转相片详情页面");
+            [self.navigationController pushViewController:vc animated:YES];
+        } cancel:^(UIViewController *viewController, HXPhotoManager *manager) {
+            NSSLog(@"block - 取消了");
+        }];
     });
 }
 
@@ -337,14 +351,15 @@
     NSSLog(@"%@,%lu",allList,(unsigned long)allList.count);
 }
 
-#pragma mark - LHGOpenCVEditingViewControllerDelegate
+//#pragma mark - LHGOpenCVEditingViewControllerDelegate
+//
+//- (void)editingController:(LHGOpenCVEditingViewController *)editor didFinishCropping:(UIImage *)finalCropImage {
+//    UIImageView *imageView = (UIImageView *)[self.view viewWithTag:500];
+//    imageView.image = finalCropImage;
+//    NSSLog(@"LHGOpenCV回调--%@",imageView);
+//
+//}
 
-- (void)editingController:(LHGOpenCVEditingViewController *)editor didFinishCropping:(UIImage *)finalCropImage {
-    UIImageView *imageView = (UIImageView *)[self.view viewWithTag:500];
-    imageView.image = finalCropImage;
-    NSSLog(@"LHGOpenCV回调--%@",imageView);
-
-}
 
 - (HXPhotoManager *)photoManager {
     if (!_photoManager) {
@@ -356,6 +371,8 @@
         _photoManager.configuration.selectTogether = NO;
         _photoManager.configuration.photoCanEdit = YES;
         _photoManager.configuration.videoCanEdit = NO;
+        _photoManager.configuration.requestOriginalImage = YES;
+        _photoManager.configuration.requestImageAfterFinishingSelection = YES;
     }
     return _photoManager;
 }
