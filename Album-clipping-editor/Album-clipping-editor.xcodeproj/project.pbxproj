@@ -34,6 +34,7 @@
 		75A2888A2BB2EBBB00CD3BA0 /* A4Utils.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75A288812BB2EBBB00CD3BA0 /* A4Utils.mm */; };
 		75A2888B2BB2EBBB00CD3BA0 /* A4Helper.mm in Sources */ = {isa = PBXBuildFile; fileRef = 75A288832BB2EBBB00CD3BA0 /* A4Helper.mm */; };
 		75A3764F2BBA40ED00BC10DD /* A4PhotoHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 75A3764E2BBA40ED00BC10DD /* A4PhotoHelper.m */; };
+		75ED00C42BBAACC000D1203B /* A4AlbumDefaultView.m in Sources */ = {isa = PBXBuildFile; fileRef = 75ED00C32BBAACC000D1203B /* A4AlbumDefaultView.m */; };
 		E9B9ADE0DD0DF8575061158A /* Pods_Album_clipping_editor.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E0D2DA77DFDA107C14B74D70 /* Pods_Album_clipping_editor.framework */; };
 /* End PBXBuildFile section */
 
@@ -107,6 +108,8 @@
 		75A288842BB2EBBB00CD3BA0 /* A4Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = A4Helper.h; sourceTree = "<group>"; };
 		75A3764D2BBA40ED00BC10DD /* A4PhotoHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = A4PhotoHelper.h; sourceTree = "<group>"; };
 		75A3764E2BBA40ED00BC10DD /* A4PhotoHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = A4PhotoHelper.m; sourceTree = "<group>"; };
+		75ED00C22BBAACC000D1203B /* A4AlbumDefaultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = A4AlbumDefaultView.h; sourceTree = "<group>"; };
+		75ED00C32BBAACC000D1203B /* A4AlbumDefaultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = A4AlbumDefaultView.m; sourceTree = "<group>"; };
 		A262EA35574BA2FBD70D0ED2 /* Pods-Album-clipping-editor-Album-clipping-editorUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Album-clipping-editor-Album-clipping-editorUITests.debug.xcconfig"; path = "Target Support Files/Pods-Album-clipping-editor-Album-clipping-editorUITests/Pods-Album-clipping-editor-Album-clipping-editorUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		AD9EB0670A055BAEE9F8037A /* Pods_Album_clipping_editor_Album_clipping_editorUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Album_clipping_editor_Album_clipping_editorUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CB20F9C38B1F5450F2958164 /* Pods_Album_clipping_editorTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Album_clipping_editorTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -249,6 +252,8 @@
 				75A2887A2BB2EBBB00CD3BA0 /* A4CropMagnifierView.m */,
 				75A2886E2BB2E7C000CD3BA0 /* A4AlbumPhotoArrView.h */,
 				75A2886F2BB2E7C000CD3BA0 /* A4AlbumPhotoArrView.m */,
+				75ED00C22BBAACC000D1203B /* A4AlbumDefaultView.h */,
+				75ED00C32BBAACC000D1203B /* A4AlbumDefaultView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -537,6 +542,7 @@
 				754C3C442BB10F3D00653926 /* A4CameraViewController.m in Sources */,
 				754C3BFA2BB1095600653926 /* ViewController.m in Sources */,
 				7559E9102BB5706900F9C310 /* ShowPictureController.m in Sources */,
+				75ED00C42BBAACC000D1203B /* A4AlbumDefaultView.m in Sources */,
 				754C3BF42BB1095600653926 /* AppDelegate.m in Sources */,
 				75A288852BB2EBBB00CD3BA0 /* A4CropFrameView.m in Sources */,
 				7559E9172BB69D3900F9C310 /* TestViewController.m in Sources */,

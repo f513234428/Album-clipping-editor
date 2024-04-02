@@ -10,7 +10,7 @@ DEPENDENCIES:
   - HXPhotoPicker (~> 3.3.2)
   - JSBadgeView (~> 2.0.0)
   - Masonry (~> 1.1.0)
-  - OpenCV2
+  - OpenCV2 (~> 4.3.0)
 
 SPEC REPOS:
   trunk:
@@ -25,6 +25,6 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   OpenCV2: ffe82e5cb5d16dc3fc01a5f4127b9a5b3cfc7d1b
 
-PODFILE CHECKSUM: 3502acafed0326fefdac9b6b2064708533367ac0
+PODFILE CHECKSUM: cb711795556b12f604498cc5583f248ba8a2a746
 
 COCOAPODS: 1.14.2

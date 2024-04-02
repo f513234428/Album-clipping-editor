@@ -10,6 +10,7 @@
 #import <HXPhotoPicker.h>
 #import <Masonry.h>
 #import "A4PhotoHelper.h"
+#import "A4AlbumDefaultView.h"
 
 @interface A4EditorBaseController ()<UIScrollViewDelegate>
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -71,7 +72,8 @@
     self.scrollView.scrollEnabled = NO;
     self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, 0);
     [self.view addSubview:self.scrollView];
-    
+
+
     self.footerView = [[UIView alloc] init];
     self.footerView.backgroundColor = [UIColor colorWithRed:27.0/255 green:27.0/255 blue:27.0/255 alpha:1];
     self.footerView.translatesAutoresizingMaskIntoConstraints= NO;//
@@ -89,25 +91,24 @@
     [self.previousBtn setImage:[UIImage imageNamed:@"previousBtnF"] forState:UIControlStateDisabled];
     [self.previousBtn addTarget:self action:@selector(previousButtonTapped) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton *rotationBtn = [[UIButton alloc] init];
-    [rotationBtn setImage:[UIImage imageNamed:@"rotationBtn"] forState:UIControlStateNormal];
-    [rotationBtn addTarget:self action:@selector(sendBottomViewDidRotate) forControlEvents:UIControlEventTouchUpInside];
-    rotationBtn.backgroundColor = [UIColor blackColor];
-    rotationBtn.layer.cornerRadius = 12;
+    @weakify(self);
+    A4AlbumDefaultView *rotationBtn = [[A4AlbumDefaultView alloc] init];
+    [rotationBtn.photoView setImage:[UIImage imageNamed:@"rotationBtn"] ];
+    [rotationBtn tapActionGesture:^{
+        [weak_self sendBottomViewDidRotate];
+    }];
     [self.footerView addSubview:rotationBtn];
     [rotationBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(32).with.priorityHigh;
         make.height.mas_equalTo(32);
     }];
     
-    UIButton *unfoldingBtn = [[UIButton alloc] init];
-    [unfoldingBtn setImage:[UIImage imageNamed:@"unfoldingBtn"] forState:UIControlStateNormal];
-    [unfoldingBtn addTarget:self action:@selector(sendBottomViewPaddingAllPoints) forControlEvents:UIControlEventTouchUpInside];
-    unfoldingBtn.backgroundColor = [UIColor blackColor];
-    unfoldingBtn.layer.cornerRadius = 12;
+    A4AlbumDefaultView *unfoldingBtn = [[A4AlbumDefaultView alloc] init];
+    [unfoldingBtn.photoView setImage:[UIImage imageNamed:@"unfoldingBtn"]];
+    [unfoldingBtn tapActionGesture:^{
+        [weak_self sendBottomViewPaddingAllPoints];
+    }];
     [self.footerView addSubview:unfoldingBtn];
     [unfoldingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.width.mas_equalTo(32);
         make.height.mas_equalTo(32);
     }];
     
@@ -147,10 +148,19 @@
 
 - (void)previousButtonTapped {
     if (self.currentIndex > 0 && self.isCanTouch) {
+        
+        if (![[A4PhotoHelper sharedHelper] isCanSavePhoto]) {
+            UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"所选区域无效" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            [alert addAction:[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleCancel handler:nil]];
+            [self presentViewController:alert animated:YES completion:nil];
+            return;
+        }
+        
         [[A4PhotoHelper sharedHelper] removePhotoArrIndex:self.currentIndex];
         CGPoint contentOffset = self.scrollView.contentOffset;
         contentOffset.x -= self.view.frame.size.width;
         [self.scrollView setContentOffset:contentOffset animated:YES];
+        
         self.currentIndex--;
         self.isCanTouch = NO;
         [self updateImageView];
@@ -173,10 +183,10 @@
         return;
     }
 
+    NSString* tag = [NSString stringWithFormat:@"%lu",(unsigned long)_currentIndex];
+    NSDictionary *userInfo = @{@"imageTag": tag};
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"bottomViewNext" object:nil userInfo:userInfo];
     if (self.currentIndex < _originImageArr.count - 1 && self.isCanTouch) {
-        NSString* tag = [NSString stringWithFormat:@"%lu",(unsigned long)_currentIndex];
-        NSDictionary *userInfo = @{@"imageTag": tag};
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"bottomViewNext" object:nil userInfo:userInfo];
         
         CGPoint contentOffset = self.scrollView.contentOffset;
         contentOffset.x += self.view.frame.size.width;
@@ -190,7 +200,10 @@
         });
     } else if (self.currentIndex == self.originImageArr.count - 1) {
         NSLog(@"所有完成");
-        NSMutableArray *editPhotoArr = [[A4PhotoHelper sharedHelper] getEditPhotoArr];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            //        NSMutableArray *editPhotoArr = [[A4PhotoHelper sharedHelper] getEditPhotoArr];
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
     }
 }
 
@@ -217,8 +230,9 @@
     [self.masonryViewArray mas_distributeViewsAlongAxis:MASAxisTypeHorizontal withFixedItemLength:84 leadSpacing:16 tailSpacing:16];
     // 设置array的垂直方向的约束
     [self.masonryViewArray mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_greaterThanOrEqualTo(self.footerView).mas_offset(6);
-        make.height.mas_lessThanOrEqualTo(32);
+        make.top.mas_greaterThanOrEqualTo(self.footerView).mas_offset(8);
+        make.height.mas_lessThanOrEqualTo(30);
+        make.width.mas_lessThanOrEqualTo(84);
     }];
 }
 

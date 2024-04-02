@@ -47,32 +47,34 @@
     [device lockForConfiguration:nil];
     
     [device unlockForConfiguration];
-    
-    self.videoInput = [[AVCaptureDeviceInput alloc] initWithDevice:device error:&error];
-    if (error) {
-        NSLog(@"%@",error);
-    }
-    self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
-    //输出设置。AVVideoCodecJPEG   输出jpeg格式图片
-    NSDictionary * setDic = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecTypeJPEG,AVVideoCodecKey, nil];
-    [self.stillImageOutput setOutputSettings:setDic];
-//    _outputSettings = [AVCapturePhotoSettings photoSettingsWithFormat:setDic];
-//    [self.stillImageOutput setPhotoSettingsForSceneMonitoring:_outputSettings];
-
-    if ([self.session canAddInput:self.videoInput]) {
-        [self.session addInput:self.videoInput];
-    }
-    if ([self.session canAddOutput:self.stillImageOutput]) {
-        [self.session addOutput:self.stillImageOutput];
-    }
-    
-    //初始化预览图层
-    self.previewLayer = [[AVCaptureVideoPreviewLayer alloc] initWithSession:self.session];
-    [self.previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
-    
-    self.previewLayer.frame = CGRectMake(0, 0,KWIDTH, KHEIGHT);
-    self.view.layer.masksToBounds = YES;
-    [self.view.layer addSublayer:self.previewLayer];
+        // Input
+        self.videoInput = [AVCaptureDeviceInput deviceInputWithDevice:device error:nil];
+        
+        // Output
+        self.stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys:AVVideoCodecTypeJPEG,AVVideoCodecKey,nil];
+        [self.stillImageOutput setOutputSettings:outputSettings];
+        
+        // Session
+        self.session = [[AVCaptureSession alloc]init];
+        //AVCaptureSessionPresetHigh:实现高质量的视频和音频输出
+        [self.session setSessionPreset:AVCaptureSessionPresetHigh];
+        // addInput:可称为虽然会话正在运行
+        if ([self.session canAddInput:self.videoInput])
+        {
+            [self.session addInput:self.videoInput];
+        }
+        
+        if ([self.session canAddOutput:self.stillImageOutput])
+        {
+            [self.session addOutput:self.stillImageOutput];
+        }
+        
+        self.previewLayer =[AVCaptureVideoPreviewLayer layerWithSession:self.session];
+        self.previewLayer.videoGravity = AVLayerVideoGravityResizeAspectFill;
+        self.previewLayer.frame = self.view.bounds;
+        
+        [self.view.layer insertSublayer:self.previewLayer atIndex:0];
     
     [self resetFocusAndExposureModes];
 }

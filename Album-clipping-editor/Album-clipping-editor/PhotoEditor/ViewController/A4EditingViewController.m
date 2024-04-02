@@ -79,6 +79,10 @@ static CGFloat kA4EditingImageMargin = 20.0;
     int tag = [[userInfo objectForKey:@"imageTag"] intValue];
     if (tag == self.imageTag) {
         [self paddingAllPoints];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[A4PhotoHelper sharedHelper] setCurrentPhotoCanSave:[self.cropFrameView isQuadEffective]];
+        });
+
     }
 }
 - (void)paddingAllPoints {
@@ -93,7 +97,9 @@ static CGFloat kA4EditingImageMargin = 20.0;
     NSDictionary *userInfo = notification.userInfo;
     int tag = [[userInfo objectForKey:@"imageTag"] intValue];
     if (tag == self.imageTag) {
-        [[A4PhotoHelper sharedHelper] savePhoto:self.originPhoto];
+        UIImage *editImage = [self.cropFrameView exportEditPhoto:self.imageView];
+        HXPhotoModel *editModel = [HXPhotoModel photoModelWithImage:editImage];
+        [[A4PhotoHelper sharedHelper] savePhoto:editModel];
     }
 }
 - (void)bottomViewDidRotate:(NSNotification *)notification {
@@ -101,18 +107,22 @@ static CGFloat kA4EditingImageMargin = 20.0;
     int tag = [[userInfo objectForKey:@"imageTag"] intValue];
     if (tag == self.imageTag) {
         [self bottomViewDidRotateClick];
+
     }
 }
 - (void)bottomViewDidRotateClick {
     UIImage *image = [self.imageView.image hx_rotationImage:UIImageOrientationLeft];
-    self.imageWidth = image.size.width;
-    self.imageHeight = image.size.height;
+    _imageWidth = image.size.width;
+    _imageHeight = image.size.height;
     CGRect imageRect = [self getImageFrame];
     self.imageView.center = self.drawingBoardView.center;
     [UIView animateWithDuration:0.2 animations:^{
         self.imageView.transform = CGAffineTransformMakeRotation(-M_PI_2);
         self.imageView.frame = imageRect;
         [self.cropFrameView reloadCropFrame:imageRect];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [[A4PhotoHelper sharedHelper] setCurrentPhotoCanSave:[self.cropFrameView isQuadEffective]];
+        });
     } completion:^(BOOL finished) {
         self.imageView.transform = CGAffineTransformIdentity;
         self.imageView.image = image;
@@ -209,6 +219,11 @@ static CGFloat kA4EditingImageMargin = 20.0;
     self.magnifierView.center = magnifierCenter;
     
     [[A4PhotoHelper sharedHelper] setCurrentPhotoCanSave:[self.cropFrameView isQuadEffective]];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSLog(@"出现了");
 }
 
 
